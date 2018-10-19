@@ -38,7 +38,10 @@ function teamseason() {
     this.general = function () {
         var rankings = JSON.parse(document.getElementById("rankingsVar").innerText)
         var events = Object.keys(rankings)
-        console.log(events)
+        var exists = document.getElementsByClassName("table")
+        if (exists.length > 0) {
+            document.getElementById("extras").removeChild(document.getElementsByClassName("table").item(0))
+        }
         var div = document.createElement("DIV")
         div.setAttribute("class", "table")
         var tbl = document.createElement("table")
