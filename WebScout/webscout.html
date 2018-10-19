@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/functions.js"></script>
+    <script src="js/eventstats.js"></script>
+    <script src="js/teamevent.js"></script>
+    <script src="js/teamseason.js"></script>
+</head>
+
+<body>
+    <div class="variables" hidden>
+        <var id="eventVar"></var>
+        <var id="teamVar"></var>
+        <var id="yearVar"></var>
+        <var id="csvVar"></var>
+        <var id="hover"></var>
+        <var id="avg"></var>
+        <var id="rankingsVar"></var>
+    </div>
+    <meta charset="UTF-8">
+    <div class="sidenav" id="menu">
+        <p onclick="getEvent('new eventstats().init()')" id="evt">Event Stats</p>
+        <p onclick="getEvent('getTeam(\'new teamevent().init()\')')" id="tevt">Team Event Stats</p>
+        <p onclick="getEvent('eventopr()')" id="eopr">Event OPR</p>
+        <p onclick="getYear('getTeam(\'new teamseason().init()\')')" id="tsea">Team Season Stats</p>
+        <p onclick="getEvent('getTeam(\'alliance()\')')" id="ali">Alliance Selections</p>
+        <p onclick="predict()" id="pre">Predict</p>
+        <p onclick="slff()" id="slff">SLFF</p>
+        <p onclick="help()" id="help">Help</p>
+    </div>
+    <div id="options" class="options">
+        <script>
+            function non() {
+                document.getElementById("yearElement").toggleAttribute("hidden")
+            }
+        </script>
+        Use Magic 8 Ball: <input type="checkbox" id="mgc?">
+        <br>Non-Existing Event?: <input type="checkbox" id="non?" onclick="non()">
+        <div id="yearElement" hidden>
+            Year: <br><input type="text" id="ovrYear">
+        </div>
+        <br>Override Teams: <input type="text" id="override">
+        <br>Rankings Limit: <input type="text" id="limit" value="25">
+        <input type="file" id="fileinput" />
+        <script>
+            document.getElementById('fileinput').addEventListener('change', readFile, false);
+        </script>
+    </div>
+    <div class="hide">
+        <input type="button" id="hide" onclick="hide()" value="Hide Options" class="hide">
+    </div>
+    <div id="extras"></div>
+</body>
+
+</html>
