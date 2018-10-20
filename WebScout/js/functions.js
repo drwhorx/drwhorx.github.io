@@ -54,15 +54,21 @@ function readFile(evt) {
         r.readAsText(f);
         r.onload = function (e) {
             var contents = e.target.result;
-            var csv = document.getElementById("csv")
-            csv.innerText = contents
+            sessionStorage.setItem("csv", contents)
         }
     }
 }
 function menu() {
     document.getElementById("extras").innerHTML = ""
     document.getElementById('menu').hidden = false
+    sessionStorage.clear()
 }
+
+function evt (item) {
+    sessionStorage.setItem(item, document.getElementById(item).value)
+    document.getElementById(item).setAttribute("value", document.getElementById(item).value)
+}
+
 function getEvent(func) {
     var checkbox = document.getElementById("non?").checked
     var sidenav = document.getElementById("menu")
@@ -73,6 +79,7 @@ function getEvent(func) {
         var button = document.createElement("BUTTON");
         button.setAttribute("onclick", func)
         button.setAttribute("id", "eventSub")
+        document.getElementById("event").setAttribute("onchange", "evt(\"event\")")
         document.getElementById("extras").appendChild(button)
         document.getElementById("eventSub").innerText = "Submit"
     } else {
@@ -83,21 +90,12 @@ function getEvent(func) {
 function getTeam(func) {
     var sidenav = document.getElementById("menu")
     sidenav.hidden = true
-    if (document.getElementById("event") !== null) {
-        document.getElementById("eventVar").innerText = document.getElementById("event").value
-    } else if (document.getElementById("year") !== null) {
-        document.getElementById("yearVar").innerText = document.getElementById("year").value
-    }
     document.getElementById("extras").innerHTML +=
         '<input type="text" id="team" placeholder="Team number (i.e. 5530)">'
-    if (document.getElementById("event") !== null) {
-        document.getElementById("event").value = document.getElementById("eventVar").innerText
-    } else if (document.getElementById("year") !== null) {
-        document.getElementById("year").value = document.getElementById("yearVar").innerText
-    }
     var button = document.createElement("BUTTON");
     button.setAttribute("onclick", func)
     button.setAttribute("id", "teamSub")
+    document.getElementById("team").setAttribute("onchange", "evt(\"team\")")
     document.getElementById("extras").appendChild(button)
     document.getElementById("teamSub").innerText = "Submit"
 }
@@ -110,6 +108,7 @@ function getYear(func) {
     var button = document.createElement("BUTTON");
     button.setAttribute("onclick", func)
     button.setAttribute("id", "yearSub")
+    document.getElementById("year").setAttribute("onchange", "evt(\"year\")")
     document.getElementById("extras").appendChild(button)
     document.getElementById("yearSub").innerText = "Submit"
 }

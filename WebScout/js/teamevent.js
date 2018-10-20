@@ -4,10 +4,8 @@ function teamevent() {
         var team = document.getElementById("team").value
         document.getElementById("extras").removeChild(document.getElementById("event"))
         document.getElementById("extras").removeChild(document.getElementById("team"))
-        document.getElementById("eventVar").innerText = event
-        document.getElementById("teamVar").innerText = team
         var rankings = getEventRankingsByTeam(event)["frc" + team]
-        document.getElementById("rankingsVar").innerText = JSON.stringify(rankings)
+        sessionStorage.setItem("rankings", JSON.stringify(rankings))
         var titles = Object.keys(rankings)
         var side = document.createElement("DIV");
         side.setAttribute('class', 'sidenav')
@@ -24,8 +22,8 @@ function teamevent() {
         document.getElementById("extras").removeChild(document.getElementById("eventSub"))
     }
     this.item = function (title) {
-        var rankings = JSON.parse(document.getElementById("rankingsVar").innerText)
-        var team = document.getElementById("teamVar").innerText
+        var rankings = JSON.parse(sessionStorage.getItem("rankings"))
+        var team = sessionStorage.getItem("team")
         var exists = document.getElementsByClassName("table")
         if (exists.length > 0) {
             document.getElementById("extras").removeChild(document.getElementsByClassName("table").item(0))
@@ -46,8 +44,8 @@ function teamevent() {
         document.getElementById("extras").appendChild(div)
     }
     this.general = function () {
-        var rankings = JSON.parse(document.getElementById("rankingsVar").innerText)
-        var team = document.getElementById("teamVar").innerText
+        var rankings = JSON.parse(sessionStorage.getItem("rankings"))
+        var team = sessionStorage.getItem("team")
         var exists = document.getElementsByClassName("table")
         if (exists.length > 0) {
             document.getElementById("extras").removeChild(document.getElementsByClassName("table").item(0))

@@ -4,8 +4,6 @@ function teamseason() {
         var team = document.getElementById("team").value
         document.getElementById("extras").removeChild(document.getElementById("year"))
         document.getElementById("extras").removeChild(document.getElementById("team"))
-        document.getElementById("yearVar").innerText = year
-        document.getElementById("teamVar").innerText = team
         document.getElementById("extras").removeChild(document.getElementById("teamSub"))
         document.getElementById("extras").removeChild(document.getElementById("yearSub"))
         var events = getTeamEventListKeys(team, year)
@@ -20,7 +18,6 @@ function teamseason() {
                 titles = Object.keys(byTeam["frc" + team])
             }
         }
-        console.log(output)
         var side = document.createElement("DIV");
         side.setAttribute('class', 'sidenav')
         var html = ""
@@ -32,11 +29,11 @@ function teamseason() {
         html += '<p onclick="menu()">Menu</p>'
         side.innerHTML += html
         document.getElementById("extras").appendChild(side)
-        document.getElementById("rankingsVar").innerText = JSON.stringify(output)
+        sessionStorage.setItem("rankings", JSON.stringify(output))
     }
 
     this.general = function () {
-        var rankings = JSON.parse(document.getElementById("rankingsVar").innerText)
+        var rankings = JSON.parse(sessionStorage.getItem("rankings"))
         var events = Object.keys(rankings)
         var exists = document.getElementsByClassName("table")
         if (exists.length > 0) {

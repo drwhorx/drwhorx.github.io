@@ -5,8 +5,7 @@ function eventstats() {
         var titles = []
         var rankings
         if (checkbox == false) {
-            document.getElementById("eventVar").innerText = document.getElementById("event").value
-            event = document.getElementById("eventVar").innerText
+            event = document.getElementById("event").value
             document.getElementById("extras").removeChild(document.getElementById("event"))
             document.getElementById("extras").removeChild(document.getElementById("eventSub"))
             rankings = getEventRankings(event)
@@ -14,7 +13,7 @@ function eventstats() {
                 rankings.sort_order_info.forEach(function (element) {
                     titles.push(element.name)
                 })
-                document.getElementById("rankingsVar").innerText = JSON.stringify(rankings)
+                sessionStorage.setItem("rankings", JSON.stringify(rankings))
             }
         }
         var side = document.createElement("DIV");
@@ -35,8 +34,8 @@ function eventstats() {
     }
     this.item = function (title) {
         var override = document.getElementById("override").value.split(", ")
-        var rankings = JSON.parse(document.getElementById("rankingsVar").innerText)
-        var event = document.getElementById("eventVar").innerText
+        var rankings = JSON.parse(sessionStorage.getItem("rankings"))
+        var event = sessionStorage.getItem("event")
         var keys = []
         if (!override || override.length == 1) {
             keys = getEventTeamsKeys(event)
@@ -96,8 +95,8 @@ function eventstats() {
     }
     this.general = function () {
         var override = document.getElementById("override").value.split(", ")
-        var rankings = JSON.parse(document.getElementById("rankingsVar").innerText)
-        var event = document.getElementById("eventVar").innerText
+        var rankings = JSON.parse(sessionStorage.getItem("rankings"))
+        var event = sessionStorage.getItem("event")
         var keys = []
         if (!override || override.length == 1) {
             keys = getEventTeamsKeys(event)
@@ -172,7 +171,7 @@ function eventstats() {
     this.avgInit = function () {
         var override = document.getElementById("override").value.split(", ")
         var keys = []
-        var event = document.getElementById("eventVar").innerText
+        var event = sessionStorage.getItem("event")
         if (!override || override.length == 1) {
             keys = getEventTeamsKeys(event)
         } else {
@@ -200,7 +199,7 @@ function eventstats() {
             }
         }
         var choices = Object.keys(arr[keys[0]][0])
-        document.getElementById("avg").innerText = JSON.stringify(arr)
+        sessionStorage.setItem("avg", JSON.stringify(arr))
         document.getElementById("extras").innerHTML = ""
         var side = document.createElement("DIV");
         side.setAttribute('class', 'sidenav')
@@ -218,7 +217,7 @@ function eventstats() {
         if (document.getElementById("divTable") !== null) {
             document.getElementById("extras").removeChild(document.getElementById("divTable"))
         }
-        var parsed = JSON.parse(document.getElementById("avg").innerText)
+        var parsed = JSON.parse(sessionStorage.getItem("avg"))
         var keys = Object.keys(parsed)
         var choices = Object.keys(parsed[keys[0]][0])
         var output = []
@@ -318,7 +317,7 @@ function eventstats() {
         if (document.getElementById("divTable") !== null) {
             document.getElementById("extras").removeChild(document.getElementById("divTable"))
         }
-        var parsed = JSON.parse(document.getElementById("avg").innerText)
+        var parsed = JSON.parse(sessionStorage.getItem("avg"))
         var keys = Object.keys(parsed)
         var choices = Object.keys(parsed[keys[0]][0])
         var index = choices.indexOf(title)
