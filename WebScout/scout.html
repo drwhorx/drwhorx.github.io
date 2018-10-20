@@ -11,6 +11,7 @@
     <script src="js/teamevent.js"></script>
     <script src="js/teamseason.js"></script>
     <script src="js/eventopr.js"></script>
+    <script src="js/parsecsv.js"></script>
 </head>
 
 <body>
@@ -21,6 +22,7 @@
         <p onclick="getEvent('eventopr()')" id="eopr">Event OPR</p>
         <p onclick="getYear('getTeam(\'new teamseason().init()\')')" id="tsea">Team Season Stats</p>
         <p onclick="getEvent('getTeam(\'alliance()\')')" id="ali">Alliance Selections</p>
+        <p onclick="new parsecsv().init()" id="prs">Import from CSV</p>
         <p onclick="predict()" id="pre">Predict</p>
         <p onclick="slff()" id="slff">SLFF</p>
         <p onclick="help()" id="help">Help</p>
@@ -38,10 +40,6 @@
         </div>
         <br>Override Teams: <input type="text" id="override">
         <br>Rankings Limit: <input type="text" id="limit" value="25">
-        <input type="file" id="fileinput" />
-        <script>
-            document.getElementById('fileinput').addEventListener('change', readFile, false);
-        </script>
     </div>
     <div class="hide">
         <button onclick="hide()" class="hide" id="hide">Hide Options</button>

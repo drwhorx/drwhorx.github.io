@@ -44,9 +44,11 @@ function getEventRankingsByTeam(eventKey) {
     })
     return output
 }
+
 function getEventTeamsKeys(eventkey) {
     return getTBA('event/' + eventkey + '/teams/keys');
 }
+
 function readFile(evt) {
     var f = evt.target.files[0];
     if (f) {
@@ -55,16 +57,18 @@ function readFile(evt) {
         r.onload = function (e) {
             var contents = e.target.result;
             sessionStorage.setItem("csv", contents)
+            new parsecsv().choose()
         }
     }
 }
+
 function menu() {
     document.getElementById("extras").innerHTML = ""
     document.getElementById('menu').hidden = false
     sessionStorage.clear()
 }
 
-function evt (item) {
+function evt(item) {
     sessionStorage.setItem(item, document.getElementById(item).value)
     document.getElementById(item).setAttribute("value", document.getElementById(item).value)
 }
@@ -83,7 +87,12 @@ function getEvent(func) {
         document.getElementById("extras").appendChild(button)
         document.getElementById("eventSub").innerText = "Submit"
     } else {
-        eval(func)
+        if (document.getElementById("ovrYear").value == "") {
+            menu()
+            alert("You must state a year if you are going to have a nonexistent event!")
+        } else {
+            eval(func)
+        }
     }
 }
 
@@ -128,11 +137,41 @@ function hover(team) {
     var table = document.getElementById("table")
     for (a = 0; a < table.rows.length; a++) {
         for (b = 0; b < table.rows[a].cells.length; b++) {
-            if (team == table.rows[a].cells[b].getAttribute("team")) {
+            if (team == table.rows[a].cells[b].getAttribute("team") && table.rows[a].cells[b].getAttribute("class") !== "clicked") {
                 table.rows[a].cells[b].setAttribute("class", "hovered")
-            } else if (table.rows[a].cells[b].getAttribute("class")) {
+            } else if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
                 table.rows[a].cells[b].removeAttribute("class")
             }
         }
+    }
+}
+
+function clicked(team) {
+    var table = document.getElementById("table")
+    for (a = 0; a < table.rows.length; a++) {
+        for (b = 0; b < table.rows[a].cells.length; b++) {
+            if (team == table.rows[a].cells[b].getAttribute("team") && table.rows[a].cells[b].getAttribute("class") !== "clicked") {
+                table.rows[a].cells[b].setAttribute("class", "clicked")
+            } else if (team == table.rows[a].cells[b].getAttribute("team") && table.rows[a].cells[b].getAttribute("class") == "clicked") {
+                table.rows[a].cells[b].removeAttribute("class")
+            }
+        }
+    }
+}
+
+function updated(a, b) {
+    var arr = JSON.parse(sessionStorage.getItem("arr"))
+    if (arr[a].titleTypes[b] == "bool") {
+        var choices = ['If true, stay at true', 'If false, stay at false', 'Percent true', 'Percent false']
+        var filtered = ["defaultTrue", "defaultFalse", "percentTrue", "percentFalse"]
+        var index = choices.indexOf(document.getElementById(arr[a].titles[b]).value)
+        arr[a].actions[b] = filtered[index]
+        sessionStorage.setItem("arr", JSON.stringify(arr))
+    } else if (arr[a].titleTypes[b] == "int") {
+        var choices = ['Maximum', 'Minimum', 'Average', 'Total']
+        var filtered = ['max', 'mix', 'avg', 'total']
+        var index = choices.indexOf(document.getElementById(arr[a].titles[b]).value)
+        arr[a].actions[b] = filtered[index]
+        sessionStorage.setItem("arr", JSON.stringify(arr))
     }
 }

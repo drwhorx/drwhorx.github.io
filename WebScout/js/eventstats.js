@@ -161,6 +161,7 @@ function eventstats() {
                     td.innerText = output[b][a]
                     var team = output[b][a].split(":")[0].slice(4)
                     td.setAttribute("onmouseover", "hover('" + team + "')")
+                    td.setAttribute("onclick", "clicked('" + team + "')")
                     td.setAttribute("team", team)
                 }
             }
@@ -298,6 +299,7 @@ function eventstats() {
                     td.innerText = final[b][a]
                     var team = final[b][a].split(":")[0].slice(4)
                     td.setAttribute("onmouseover", "hover('" + team + "')")
+                    td.setAttribute("onclick", "clicked('" + team + "')")
                     td.setAttribute("team", team)
                 }
             }
@@ -335,8 +337,6 @@ function eventstats() {
                 var td = row.insertCell()
                 td.innerText = item[a]
                 var team = item[a].split(":")[0].slice(4)
-                td.setAttribute("onmouseover", "hover('" + team + "')")
-                td.setAttribute("team", team)
             }
         }
         div.appendChild(tbl)
