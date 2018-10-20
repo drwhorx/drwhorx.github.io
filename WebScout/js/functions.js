@@ -117,10 +117,10 @@ function hide() {
     var options = document.getElementById("options")
     options.toggleAttribute("hidden")
     var button = document.getElementById("hide")
-    if (button.value == "Hide Options") {
-        button.value = "Show Options"
+    if (button.innerText == "Hide Options") {
+        button.innerText = "Show Options"
     } else {
-        button.value = "Hide Options"
+        button.innerText = "Hide Options"
     }
 }
 
