@@ -75,28 +75,14 @@ function parsecsv() {
                 "temp": false,
                 "actual": 0
             }
-            while (a !== b) {
-                if (getItem(x + a, y) !== "") {
-                    var item = getItem(x + a, y)
-                    output.titles.push(item)
-                    output.titleTypes.push("int")
-                    a++
-                    b++
-                } else {
-                    b++
-                }
+            for (let a = 1; getItem(x + a, y) !== ""; a++) {
+                var item = getItem(x + a, y)
+                output.titles.push(item)
+                output.titleTypes.push("int")
             }
-            a = 1
-            b = 0
-            while (a !== b) {
-                if (getItem(x, y + a) !== "") {
-                    var item = getItem(x, y + a)
-                    output.rows.push(item)
-                    a++
-                    b++
-                } else {
-                    b++
-                }
+            for (let a = 1; getItem(x, y + a) !== ""; a++) {
+                var item = getItem(x, y + a)
+                output.rows.push(item)
             }
             for (let a = 0; a < output.titles.length; a++) {
                 for (let b = 0; b < output.rows.length; b++) {
@@ -283,10 +269,6 @@ function parsecsv() {
             var team = allRows[a]
             var thisTable = rowsByTable[a]
             if (last.itemsByTeam[team] !== undefined) {
-                if (team == "3542") {
-                    console.log(arr[thisTable].itemsByTeam[team])
-                }
-                console.log(a)
                 for (let b = 0; b < arr[thisTable].titles.length; b++) {
                     var title = arr[thisTable].titles[b]
                     var type = arr[thisTable].titleTypes[b]
@@ -328,9 +310,9 @@ function parsecsv() {
                                     last.itemsByTeam[team][title] = item
                                 }
                             } else if (act == "avg") {
-                                last.itemsByTeam[team][title].push(+value)
+                                last.itemsByTeam[team][title].push(value)
                             } else if (act == "total") {
-                                last.itemsByTeam[team][title] += +value
+                                last.itemsByTeam[team][title] += (+value)
                             }
                         }
                     } else {
@@ -349,7 +331,7 @@ function parsecsv() {
                             }
                         } else if (type == "int") {
                             if (act == "avg") {
-                                last.itemsByTeam[team][title] = [+value]
+                                last.itemsByTeam[team][title] = [value]
                             } else {
                                 last.itemsByTeam[team][title] = +value
                             }
@@ -398,7 +380,7 @@ function parsecsv() {
                                     last.itemsByTeam[team][title] = item
                                 }
                             } else if (act == "avg") {
-                                last.itemsByTeam[team][title].push(+value)
+                                last.itemsByTeam[team][title].push(value)
                             } else if (act == "total") {
                                 last.itemsByTeam[team][title] += +value
                             }
@@ -419,7 +401,7 @@ function parsecsv() {
                             }
                         } else if (type == "int") {
                             if (act == "avg") {
-                                last.itemsByTeam[team][title] = [+value]
+                                last.itemsByTeam[team][title] = [value]
                             } else {
                                 last.itemsByTeam[team][title] = +value
                             }
