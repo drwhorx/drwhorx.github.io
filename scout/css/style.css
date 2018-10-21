@@ -139,12 +139,14 @@ table.blueTable td,
 table.blueTable th {
     border: 1px solid #AAAAAA;
     padding: 3px 25px 3px 0;
+    white-space: nowrap;
 }
 
 table.blueTable tbody td {
     padding: 3px 25px 3px 0;
     text-align: left;
     font-size: 13px;
+    white-space: nowrap;
 }
 
 table.blueTable tr:nth-child(even) {

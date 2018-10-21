@@ -3,18 +3,9 @@ function parsecsv() {
         var target = this;
         return target.replace(new RegExp(search, 'g'), replacement);
     };
-    var questions = [{
-        type: 'list',
-        name: 'action',
-        message: 'How would you like to combine boolean lists?',
-        choices: ['If true, stay at true', 'If false, stay at false', 'Percent true', 'Percent false']
-    }, {
-        type: 'list',
-        name: 'action',
-        message: 'How would you like to combine integer lists?',
-        choices: ['Maximum', 'Minimum', 'Average', 'Total']
-    }]
     this.init = function () {
+        document.getElementById("event").remove()
+        document.getElementById("eventSub").remove()
         var sidenav = document.getElementById("menu")
         sidenav.hidden = true
         document.getElementById("extras").innerHTML += "<input type=\"file\" name=\"file\" id=\"file\" class=\"inputfile\" accept=\".csv\"/>"
@@ -111,8 +102,6 @@ function parsecsv() {
                     for (let b = 0; b < output.titles.length; b++) {
                         next.itemsByTeam[team].push(getItem(x + b + 1, y + a + 1))
                     }
-                    output.rows.splice(a, 1)
-                    a--
                     arr.push(next)
                 } else {
                     output.itemsByTeam[output.rows[a]] = []
@@ -121,6 +110,16 @@ function parsecsv() {
                     }
                 }
             }
+            var tempRows = []
+            for (let a = 0; a < output.rows.length; a++) {
+                if (tempRows.indexOf(output.rows[a]) > -1) {
+                    output.rows.splice(a, 1)
+                    a--
+                } else {
+                    tempRows.push(output.rows[a])
+                }
+            }
+            output.rows = tempRows
             output.actual = arr.length
             arr.push(output)
             arr.forEach(function (element, e) {
@@ -130,7 +129,7 @@ function parsecsv() {
             })
         }
         var choices = []
-        arr.forEach(function (element, i) {
+        arr.forEach(function (element) {
             if (element.temp == false) {
                 choices.push((element.index + 1) + ". \"" + element.titles.join("\", \"") + "\"")
             }
@@ -175,6 +174,7 @@ function parsecsv() {
         }
         var div = document.createElement("div")
         div.setAttribute("class", "actions")
+        div.setAttribute("id", "actions")
         for (let a = 0; a < arr.length; a++) {
             for (let b = 0; b < arr[a].titles.length; b++) {
                 if (arr[a].temp !== true) {
@@ -223,7 +223,6 @@ function parsecsv() {
     }
     this.final = function () {
         var arr = JSON.parse(sessionStorage.getItem("arr"))
-        console.log(arr)
         var last = {
             "titles": [],
             "titleTypes": [],
@@ -434,7 +433,7 @@ function parsecsv() {
                         temp[title] = value
                     } else if (type == "bool") {
                         if (act == "percentTrue" || act == "percentFalse") {
-                            var sum = value.reduce((a, b) => a + b)
+                            var sum = value.reduce((a, b) => (+a) + (+b))
                             var length = value.length
                             temp[title] = (sum / length)
                         } else {
@@ -442,7 +441,7 @@ function parsecsv() {
                         }
                     } else if (type == "int") {
                         if (act == "avg") {
-                            var sum = value.reduce((a, b) => a + b)
+                            var sum = value.reduce((a, b) => (+a) + (+b))
                             var length = value.length
                             temp[title] = (sum / length)
                         } else {
@@ -453,6 +452,10 @@ function parsecsv() {
             }
             last.itemsByTeam[team] = temp
         }
-        console.log(last)
+        var event = sessionStorage.getItem("event")
+        localStorage.setItem("scout" + event, JSON.stringify(last))
+        document.getElementById("actions").remove()
+        menu()
+        alert("Scouting data added!")
     }
 }

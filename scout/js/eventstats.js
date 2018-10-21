@@ -4,8 +4,10 @@ function eventstats() {
         var event
         var titles = []
         var rankings
+        var scouting
         if (checkbox == false) {
             event = document.getElementById("event").value
+            scouting = localStorage.getItem("scout" + event)
             document.getElementById("extras").removeChild(document.getElementById("event"))
             document.getElementById("extras").removeChild(document.getElementById("eventSub"))
             rankings = getEventRankings(event)
@@ -14,6 +16,12 @@ function eventstats() {
                     titles.push(element.name)
                 })
                 sessionStorage.setItem("rankings", JSON.stringify(rankings))
+                if (scouting !== null) {
+                    scouting = JSON.parse(scouting)
+                    scouting.titles.forEach(function (element) {
+                        titles.push(element)
+                    })
+                }
             }
         }
         var side = document.createElement("DIV");
@@ -30,7 +38,6 @@ function eventstats() {
         html += '<p onclick="menu()">Menu</p>'
         side.innerHTML += html
         document.getElementById("extras").appendChild(side)
-        var override = document.getElementById("override").value.split(", ")
     }
     this.item = function (title) {
         var override = document.getElementById("override").value.split(", ")
@@ -64,31 +71,90 @@ function eventstats() {
         tbl.setAttribute("class", "blueTable")
         tbl.setAttribute("id", "table")
         tbl.innerHTML += "<th align=\"left\">" + title + "</th>"
-        var index = titles.indexOf(title)
-        var teams = []
-        var values = []
-        rankings.rankings.forEach(function (element) {
-            teams.push(element.team_key.slice(3))
-            values.push(element.sort_orders[index])
-        })
-        var sorted = values.slice(0)
-        sorted.sort(function (a, b) {
-            return b - a;
-        });
-        var arr = []
-        for (i = 0; i < document.getElementById("limit").value; i++) {
-            if (sorted[i] !== undefined) {
-                var val = sorted[i]
-                var index = values.indexOf(val)
-                arr.push('FRC ' + teams[index] + ': ' + val)
-                teams.splice(index, 1)
-                values.splice(index, 1)
-            }
+        var scouting = localStorage.getItem("scout" + event)
+        if (scouting !== null) {
+            scouting = JSON.parse(scouting)
         }
-        for (i = 0; i < arr.length; i++) {
-            var row = tbl.insertRow()
-            var td = row.insertCell()
-            td.innerText = arr[i]
+        if (scouting !== null && scouting.titles.indexOf(title) > -1) {
+            var keys = scouting.rows
+            var teams = []
+            var values = []
+            var a = scouting.titles.indexOf(title)
+            for (let b = 0; b < keys.length; b++) {
+                var team = keys[b]
+                teams.push(team)
+                values.push(scouting.itemsByTeam[team][title])
+            }
+            var act = scouting.actions[a]
+            var sorted
+            if (act == "percentTrue" || act == "percentFalse" || act == "avg" || act == "max" || act == "min" || act == "total") {
+                sorted = values.slice(0)
+                sorted.sort(function (a, b) {
+                    return b - a
+                });
+            } else if (act == "defaultTrue") {
+                sorted = values.slice(0)
+                for (i = 0; i < sorted.length; i++) {
+                    if (sorted[i] == "TRUE") {
+                        var item = sorted[i]
+                        sorted.splice(i, 1)
+                        sorted.unshift(item)
+                    }
+                }
+            } else if (act == "defaultFalse") {
+                if (sorted[i] == "FALSE") {
+                    var item = sorted[i]
+                    sorted.splice(i, 1)
+                    sorted.unshift(item)
+                }
+            } else {
+                sorted = values.slice(0)
+            }
+            var arr = []
+            for (i = 0; i < document.getElementById("limit").value; i++) {
+                if (sorted[i] !== undefined) {
+                    var val = sorted[i]
+                    var index = values.indexOf(val)
+                    if (!isNaN(+val)) {
+                        val = Math.floor(val * 100) / 100
+                    }
+                    arr.push('FRC ' + teams[index] + ': ' + val)
+                    teams.splice(index, 1)
+                    values.splice(index, 1)
+                }
+            }
+            for (i = 0; i < arr.length; i++) {
+                var row = tbl.insertRow()
+                var td = row.insertCell()
+                td.innerText = arr[i]
+            }
+        } else {
+            var index = titles.indexOf(title)
+            var teams = []
+            var values = []
+            rankings.rankings.forEach(function (element) {
+                teams.push(element.team_key.slice(3))
+                values.push(element.sort_orders[index])
+            })
+            var sorted = values.slice(0)
+            sorted.sort(function (a, b) {
+                return b - a;
+            });
+            var arr = []
+            for (i = 0; i < document.getElementById("limit").value; i++) {
+                if (sorted[i] !== undefined) {
+                    var val = sorted[i]
+                    var index = values.indexOf(val)
+                    arr.push('FRC ' + teams[index] + ': ' + val)
+                    teams.splice(index, 1)
+                    values.splice(index, 1)
+                }
+            }
+            for (i = 0; i < arr.length; i++) {
+                var row = tbl.insertRow()
+                var td = row.insertCell()
+                td.innerText = arr[i]
+            }
         }
         div.appendChild(tbl)
         document.getElementById("extras").appendChild(div)
@@ -98,6 +164,10 @@ function eventstats() {
         var rankings = JSON.parse(sessionStorage.getItem("rankings"))
         var event = sessionStorage.getItem("event")
         var keys = []
+        var scouting = localStorage.getItem("scout" + event)
+        if (scouting !== null) {
+            scouting = JSON.parse(scouting)
+        }
         if (!override || override.length == 1) {
             keys = getEventTeamsKeys(event)
         } else {
@@ -109,6 +179,15 @@ function eventstats() {
             if (keys.indexOf(rankings.rankings[a].team_key) == -1) {
                 rankings.rankings.splice(a, 1)
                 a--
+            }
+        }
+        if (scouting !== null) {
+            for (a = 0; a < scouting.rows.length; a++) {
+                if (keys.indexOf("frc" + scouting.rows[a]) == -1) {
+                    delete scouting.itemsByTeam[scouting.rows[a]]
+                    scouting.rows.splice(a, 1)
+                    a--
+                }
             }
         }
         var titles = []
@@ -127,6 +206,11 @@ function eventstats() {
         var heading = "<tr>"
         for (a = 0; a < titles.length; a++) {
             heading += ("<th align=\"left\">" + titles[a] + "</th>")
+        }
+        if (scouting !== null) {
+            for (a = 0; a < scouting.titles.length; a++) {
+                heading += ("<th align=\"left\">" + scouting.titles[a] + "</th>")
+            }
         }
         tbl.innerHTML += heading
         var output = []
@@ -153,10 +237,64 @@ function eventstats() {
             }
             output.push(arr)
         }
+        console.log(scouting)
+        if (scouting !== null) {
+            var keys = scouting.rows
+            var titles = scouting.titles
+            for (let a = 0; a < titles.length; a++) {
+                var teams = []
+                var values = []
+                var title = titles[a]
+                for (let b = 0; b < keys.length; b++) {
+                    var team = keys[b]
+                    teams.push(team)
+                    values.push(scouting.itemsByTeam[team][title])
+                }
+                var act = scouting.actions[a]
+                var sorted
+                if (act == "percentTrue" || act == "percentFalse" || act == "avg" || act == "max" || act == "min" || act == "total") {
+                    sorted = values.slice(0)
+                    sorted.sort(function (a, b) {
+                        return b - a
+                    });
+                } else if (act == "defaultTrue") {
+                    sorted = values.slice(0)
+                    for (i = 0; i < sorted.length; i++) {
+                        if (sorted[i] == "TRUE") {
+                            var item = sorted[i]
+                            sorted.splice(i, 1)
+                            sorted.unshift(item)
+                        }
+                    }
+                } else if (act == "defaultFalse") {
+                    if (sorted[i] == "FALSE") {
+                        var item = sorted[i]
+                        sorted.splice(i, 1)
+                        sorted.unshift(item)
+                    }
+                } else {
+                    sorted = values.slice(0)
+                }
+                var arr = []
+                for (i = 0; i < document.getElementById("limit").value; i++) {
+                    if (sorted[i] !== undefined) {
+                        var val = sorted[i]
+                        var index = values.indexOf(val)
+                        if (!isNaN(+val)) {
+                            val = Math.floor(val * 100) / 100
+                        }
+                        arr.push('FRC ' + teams[index] + ': ' + val)
+                        teams.splice(index, 1)
+                        values.splice(index, 1)
+                    }
+                }
+                output.push(arr)
+            }
+        }
         for (a = 0; a < document.getElementById("limit").value; a++) {
             if (output[0][a] !== undefined) {
                 var row = tbl.insertRow()
-                for (b = 0; b < titles.length; b++) {
+                for (b = 0; b < output.length; b++) {
                     var td = row.insertCell()
                     td.innerText = output[b][a]
                     var team = output[b][a].split(":")[0].slice(4)
