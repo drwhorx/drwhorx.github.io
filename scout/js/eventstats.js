@@ -75,6 +75,15 @@ function eventstats() {
         if (scouting !== null) {
             scouting = JSON.parse(scouting)
         }
+        if (scouting !== null) {
+            for (a = 0; a < scouting.rows.length; a++) {
+                if (keys.indexOf("frc" + scouting.rows[a]) == -1) {
+                    delete scouting.itemsByTeam[scouting.rows[a]]
+                    scouting.rows.splice(a, 1)
+                    a--
+                }
+            }
+        }
         if (scouting !== null && scouting.titles.indexOf(title) > -1) {
             var keys = scouting.rows
             var teams = []
@@ -102,10 +111,13 @@ function eventstats() {
                     }
                 }
             } else if (act == "defaultFalse") {
-                if (sorted[i] == "FALSE") {
-                    var item = sorted[i]
-                    sorted.splice(i, 1)
-                    sorted.unshift(item)
+                sorted = values.slice(0)
+                for (i = 0; i < sorted.length; i++) {
+                    if (sorted[i] == "FALSE") {
+                        var item = sorted[i]
+                        sorted.splice(i, 1)
+                        sorted.unshift(item)
+                    }
                 }
             } else {
                 sorted = values.slice(0)
@@ -115,7 +127,9 @@ function eventstats() {
                 if (sorted[i] !== undefined) {
                     var val = sorted[i]
                     var index = values.indexOf(val)
-                    if (!isNaN(+val)) {
+                    if (act == "percentTrue" || act == "percentFalse") {
+                        val = (Math.floor(val * 100)) + "%"
+                    } else if (act == "total" || act == "avg" || act == "min" || act == "max") {
                         val = Math.floor(val * 100) / 100
                     }
                     arr.push('FRC ' + teams[index] + ': ' + val)
@@ -281,7 +295,11 @@ function eventstats() {
                         var val = sorted[i]
                         var index = values.indexOf(val)
                         if (!isNaN(+val)) {
-                            val = Math.floor(val * 100) / 100
+                            if (act == "percentTrue" || act == "percentFalse"){
+                                val = (Math.floor(val * 100)) + "%"
+                            } else {
+                                val = Math.floor(val * 100) / 100
+                            }
                         }
                         arr.push('FRC ' + teams[index] + ': ' + val)
                         teams.splice(index, 1)

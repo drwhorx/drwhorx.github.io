@@ -159,6 +159,30 @@ function clicked(team) {
     }
 }
 
+function delClick(team) {
+    var existing = JSON.parse(sessionStorage.getItem("picked"))
+    existing.push(team)
+    sessionStorage.setItem("picked", JSON.stringify(existing))
+    var table = document.getElementById("table")
+    var headings = table.getElementsByTagName("th")
+    var side = document.getElementById("extras").getElementsByClassName("sidenav").item(0)
+    var names = []
+    for (i = 0; i < side.getElementsByTagName("p").length; i++) {
+        names.push(side.getElementsByTagName("p").item(i).innerText)
+    }
+    console.log(headings)
+    console.log(names)
+    if (headings.length > 1 && names.indexOf("Season Averages") > -1) {
+        new alliance().general()
+    } else if (headings.length == 1 && names.indexOf("Season Averages") > -1) {
+        new alliance().item(headings.item(0).innerText)
+    } else if (headings.length > 1 && names.indexOf("Season Averages") == -1) {
+        new alliance().avgGeneral()
+    } else if (headings.length == 1 && names.indexOf("Season Averages") == -1) {
+        new alliance().avgItem(headings.item(0).innerText)
+    }
+}
+
 function updated(a, b) {
     var arr = JSON.parse(sessionStorage.getItem("arr"))
     if (arr[a].titleTypes[b] == "bool") {

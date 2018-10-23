@@ -12,6 +12,7 @@
     <script src="js/teamseason.js"></script>
     <script src="js/eventopr.js"></script>
     <script src="js/parsecsv.js"></script>
+    <script src="js/alliance.js"></script>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
         <p onclick="getEvent('getTeam(\'new teamevent().init()\')')" id="tevt">Team Event Stats</p>
         <p onclick="getEvent('eventopr()')" id="eopr">Event OPR</p>
         <p onclick="getYear('getTeam(\'new teamseason().init()\')')" id="tsea">Team Season Stats</p>
-        <p onclick="getEvent('getTeam(\'alliance()\')')" id="ali">Alliance Selections</p>
+        <p onclick="getEvent('new alliance().init()')" id="ali">Alliance Selections</p>
         <p onclick="getEvent('new parsecsv().init()')" id="prs">Import from CSV</p>
         <p onclick="predict()" id="pre">Predict</p>
         <p onclick="slff()" id="slff">SLFF</p>
