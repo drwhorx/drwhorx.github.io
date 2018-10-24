@@ -23,6 +23,7 @@ function eventstats() {
                     })
                 }
             }
+            addMes("\n\nEvent stats for " + TBAEvent(event).name)
         }
         var side = document.createElement("DIV");
         side.setAttribute('class', 'sidenav')

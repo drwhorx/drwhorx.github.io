@@ -456,6 +456,6 @@ function parsecsv() {
         localStorage.setItem("scout" + event, JSON.stringify(last))
         document.getElementById("actions").remove()
         menu()
-        alert("Scouting data added!")
+        addMes("\n\nScouting data added!")
     }
 }

@@ -13,6 +13,7 @@
     <script src="js/eventopr.js"></script>
     <script src="js/parsecsv.js"></script>
     <script src="js/alliance.js"></script>
+    <script src="js/predict.js"></script>
 </head>
 
 <body>
@@ -20,11 +21,11 @@
     <div class="sidenav" id="menu">
         <p onclick="getEvent('new eventstats().init()')" id="evt">Event Stats</p>
         <p onclick="getEvent('getTeam(\'new teamevent().init()\')')" id="tevt">Team Event Stats</p>
-        <p onclick="getEvent('eventopr()')" id="eopr">Event OPR</p>
+        <p onclick="getEvent('new eventopr().init()')" id="eopr">Event OPR</p>
         <p onclick="getYear('getTeam(\'new teamseason().init()\')')" id="tsea">Team Season Stats</p>
         <p onclick="getEvent('new alliance().init()')" id="ali">Alliance Selections</p>
         <p onclick="getEvent('new parsecsv().init()')" id="prs">Import from CSV</p>
-        <p onclick="predict()" id="pre">Predict</p>
+        <p onclick="getEvent('new predict().init()')" id="pre">Predict</p>
         <p onclick="slff()" id="slff">SLFF</p>
         <p onclick="help()" id="help">Help</p>
     </div>
@@ -35,15 +36,19 @@
             }
         </script>
         Use Magic 8 Ball: <input type="checkbox" id="mgc?">
-        <br>Non-Existing Event?: <input type="checkbox" id="non?" onclick="non()">
+        <br>Non-Existing Event?: <input type="checkbox" id="non?" onclick="non()"><br>
         <div id="yearElement" hidden>
             Year: <br><input type="text" id="ovrYear">
         </div>
-        <br>Override Teams: <input type="text" id="override">
+        Override Teams: <input type="text" id="override">
         <br>Rankings Limit: <input type="text" id="limit" value="25">
     </div>
     <div class="hide">
         <button onclick="hide()" class="hide" id="hide">Hide Options</button>
+    </div>
+    <div class="messages" id="messages" style="font-size: 12px">Welcome to Amon Green's WebScout!<br>Check "Help" for more info.</div>
+    <div class="hideMes">
+        <button onclick="hideMes()" class="hideMes" id="hideMes">Hide Messages</button>
     </div>
     <div id="extras"></div>
 </body>

@@ -2,6 +2,7 @@ function teamseason() {
     this.init = function () {
         var year = document.getElementById("year").value
         var team = document.getElementById("team").value
+        addMes("\n\nTeam stats for " + team + " in " + year)
         document.getElementById("extras").removeChild(document.getElementById("year"))
         document.getElementById("extras").removeChild(document.getElementById("team"))
         document.getElementById("extras").removeChild(document.getElementById("teamSub"))

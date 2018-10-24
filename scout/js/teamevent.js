@@ -2,6 +2,7 @@ function teamevent() {
     this.init = function () {
         var event = document.getElementById("event").value
         var team = document.getElementById("team").value
+        addMes("\n\nTeam stats for " + team + " at " + TBAEvent(event).name)
         document.getElementById("extras").removeChild(document.getElementById("event"))
         document.getElementById("extras").removeChild(document.getElementById("team"))
         var rankings = getEventRankingsByTeam(event)["frc" + team]

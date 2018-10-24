@@ -22,6 +22,14 @@ function TBAEvent(eventkey) {
     return getTBA('event/' + eventkey);
 }
 
+function eventOPRS(eventkey) {
+    return getTBA('event/' + eventkey + '/oprs');
+}
+
+function eventPredict(eventkey) {
+    return getTBA('event/' + eventkey + '/predictions');
+}
+
 function getEventRankingsByTeam(eventKey) {
     var rankings = getEventRankings(eventKey)
     if (!rankings) {
@@ -66,6 +74,8 @@ function menu() {
     document.getElementById("extras").innerHTML = ""
     document.getElementById('menu').hidden = false
     sessionStorage.clear()
+    var bin = document.getElementById("messages")
+    bin.innerText = "Welcome to Amon Green's WebScout!\nCheck \"Help\" for more info."
 }
 
 function evt(item) {
@@ -79,7 +89,7 @@ function getEvent(func) {
     sidenav.hidden = true
     if (checkbox == false) {
         document.getElementById("extras").innerHTML +=
-            '<input type="text" id="event" placeholder="Event key (i.e. 2018milin)">'
+            '<input type="text" id="event" style="margin-left:10px;margin-top:10px" placeholder="Event key (i.e. 2018milin)">'
         var button = document.createElement("BUTTON");
         button.setAttribute("onclick", func)
         button.setAttribute("id", "eventSub")
@@ -100,7 +110,7 @@ function getTeam(func) {
     var sidenav = document.getElementById("menu")
     sidenav.hidden = true
     document.getElementById("extras").innerHTML +=
-        '<input type="text" id="team" placeholder="Team number (i.e. 5530)">'
+        '<input type="text" id="team" style="margin-left:10px;margin-top:10px" placeholder="Team number (i.e. 5530)">'
     var button = document.createElement("BUTTON");
     button.setAttribute("onclick", func)
     button.setAttribute("id", "teamSub")
@@ -113,7 +123,7 @@ function getYear(func) {
     var sidenav = document.getElementById("menu")
     sidenav.hidden = true
     document.getElementById("extras").innerHTML +=
-        '<input type="text" id="year" placeholder="Year (i.e. 2018)">'
+        '<input type="text" id="year" style="margin-left:10px;margin-top:10px" placeholder="Year (i.e. 2018)">'
     var button = document.createElement("BUTTON");
     button.setAttribute("onclick", func)
     button.setAttribute("id", "yearSub")
@@ -130,6 +140,17 @@ function hide() {
         button.innerText = "Show Options"
     } else {
         button.innerText = "Hide Options"
+    }
+}
+
+function hideMes() {
+    var options = document.getElementById("messages")
+    options.toggleAttribute("hidden")
+    var button = document.getElementById("hideMes")
+    if (button.innerText == "Hide Messages") {
+        button.innerText = "Show Messages"
+    } else {
+        button.innerText = "Hide Messages"
     }
 }
 
@@ -170,8 +191,7 @@ function delClick(team) {
     for (i = 0; i < side.getElementsByTagName("p").length; i++) {
         names.push(side.getElementsByTagName("p").item(i).innerText)
     }
-    console.log(headings)
-    console.log(names)
+    addMes("\n" + team + " was picked!")
     if (headings.length > 1 && names.indexOf("Season Averages") > -1) {
         new alliance().general()
     } else if (headings.length == 1 && names.indexOf("Season Averages") > -1) {
@@ -198,4 +218,9 @@ function updated(a, b) {
         arr[a].actions[b] = filtered[index]
         sessionStorage.setItem("arr", JSON.stringify(arr))
     }
+}
+
+function addMes(message) {
+    var bin = document.getElementById("messages")
+    bin.innerText += message
 }
