@@ -42,7 +42,7 @@ function alliance() {
         document.getElementById("extras").appendChild(side)
     }
     this.item = function (title) {
-        var override = document.getElementById("override").value.split(", ")
+        var override = document.getElementById("override").value.replaceAll(" ", "").replaceAll("\t", ",").replaceAll("\n", ",").split(",")
         var rankings = JSON.parse(sessionStorage.getItem("rankings"))
         var event = sessionStorage.getItem("event")
         var keys = []
@@ -184,7 +184,7 @@ function alliance() {
         document.getElementById("extras").appendChild(div)
     }
     this.general = function () {
-        var override = document.getElementById("override").value.split(", ")
+        var override = document.getElementById("override").value.replaceAll(" ", "").replaceAll("\t", "").replaceAll("\n", ",").split(",")
         var rankings = JSON.parse(sessionStorage.getItem("rankings"))
         var event = sessionStorage.getItem("event")
         var keys = []
@@ -340,7 +340,12 @@ function alliance() {
         document.getElementById("extras").appendChild(div)
     }
     this.avgInit = function () {
-        var override = document.getElementById("override").value.split(", ")
+        var override = document.getElementById("override").value.replaceAll(" ", ",").replaceAll("\t", ",").replaceAll("\n", ",").split(",")
+        override.forEach(function (element, i) {
+            if (element == "") {
+                override.splice(i, 1)
+            }
+        })
         var keys = []
         var event = sessionStorage.getItem("event")
         if (!override || override.length == 1) {

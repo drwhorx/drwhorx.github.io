@@ -1,3 +1,7 @@
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
 function getTBA(url) {
     return JSON.parse($.ajax({
         url: "https://www.thebluealliance.com/api/v3/" + url,

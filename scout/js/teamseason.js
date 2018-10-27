@@ -14,7 +14,7 @@ function teamseason() {
             var name = TBAEvent(events[i]).name
             var byTeam = getEventRankingsByTeam(events[i])
             var rankings = getEventRankings(events[i])
-            if (rankings !== null && rankings !== undefined && rankings.rankings !== undefined && rankings.rankings.length > 0) {
+            if (rankings !== null && rankings !== undefined && rankings.rankings !== undefined && rankings.rankings !== null && rankings.rankings.length > 0) {
                 output[name] = byTeam["frc" + team]
                 titles = Object.keys(byTeam["frc" + team])
             }
