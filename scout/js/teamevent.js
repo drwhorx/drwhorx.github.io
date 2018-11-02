@@ -8,6 +8,13 @@ function teamevent() {
         var rankings = getEventRankingsByTeam(event)["frc" + team]
         sessionStorage.setItem("rankings", JSON.stringify(rankings))
         var titles = Object.keys(rankings)
+        var scouting = localStorage.getItem("scout" + event)
+        if (scouting !== null) {
+            scouting = JSON.parse(scouting)
+            scouting.titles.forEach(function (element) {
+                titles.push(element)
+            })
+        }
         var side = document.createElement("DIV");
         side.setAttribute('class', 'sidenav')
         var html = ""
@@ -25,9 +32,19 @@ function teamevent() {
     this.item = function (title) {
         var rankings = JSON.parse(sessionStorage.getItem("rankings"))
         var team = sessionStorage.getItem("team")
+        var event = sessionStorage.getItem("event")
         var exists = document.getElementsByClassName("table")
         if (exists.length > 0) {
             document.getElementById("extras").removeChild(document.getElementsByClassName("table").item(0))
+        }
+        var scouting = localStorage.getItem("scout" + event)
+        if (scouting !== null) {
+            scouting = JSON.parse(scouting)
+        }
+        if (scouting !== null && scouting.titles.indexOf(title) > -1) {
+
+        } else {
+            
         }
         var div = document.createElement("DIV")
         div.setAttribute("class", "table")

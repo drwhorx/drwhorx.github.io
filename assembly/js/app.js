@@ -1,0 +1,1 @@
+console.log($.getJSON("https://drwhorx.github.io/assembly/js/data.json"));

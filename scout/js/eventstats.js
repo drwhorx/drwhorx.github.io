@@ -1,5 +1,6 @@
 function eventstats() {
     this.init = function () {
+        sessionStorage.setItem("picked", "[]")
         var checkbox = document.getElementById("non?").checked
         var event
         var titles = []
@@ -41,7 +42,12 @@ function eventstats() {
         document.getElementById("extras").appendChild(side)
     }
     this.item = function (title) {
-        var override = document.getElementById("override").value.replaceAll(" ", "").split(",")
+        var override = document.getElementById("override").value.replaceAll(" ", ",").replaceAll("\t", ",").replaceAll("\n", ",").split(",")
+        override.forEach(function (element, i) {
+            if (element == "") {
+                override.splice(i, 1)
+            }
+        })
         var rankings = JSON.parse(sessionStorage.getItem("rankings"))
         var event = sessionStorage.getItem("event")
         var keys = []
@@ -52,6 +58,10 @@ function eventstats() {
                 keys.push("frc" + element)
             })
         }
+        var picked = JSON.parse(sessionStorage.getItem("picked"))
+        picked.forEach(function (element) {
+            keys.splice(keys.indexOf("frc" + element), 1)
+        })
         for (a = 0; a < rankings.rankings.length; a++) {
             if (keys.indexOf(rankings.rankings[a].team_key) == -1) {
                 rankings.rankings.splice(a, 1)
@@ -142,6 +152,37 @@ function eventstats() {
                 var row = tbl.insertRow()
                 var td = row.insertCell()
                 td.innerText = arr[i]
+                var team = arr[i].split(":")[0].slice(4)
+                td.setAttribute("onmouseover", "hover('" + team + "')")
+                td.setAttribute("onmouseleave", "onleave('" + team + "')")
+                document.addEventListener("keydown", (event) => {
+                    var key = event.altKey
+                    var table = document.getElementById("table")
+                    if (key == true && table !== null) {
+                        for (a = 0; a < table.rows.length; a++) {
+                            for (b = 0; b < table.rows[a].cells.length; b++) {
+                                if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                                    table.rows[a].cells[b].setAttribute("style", "background-color:red")
+                                }
+                            }
+                        }
+                    }
+                })
+                document.addEventListener("keyup", (event) => {
+                    var table = document.getElementById("table")
+                    if (table !== null) {
+                        for (a = 0; a < table.rows.length; a++) {
+                            for (b = 0; b < table.rows[a].cells.length; b++) {
+                                if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                                    table.rows[a].cells[b].removeAttribute("style")
+                                }
+                            }
+                        }
+                    }
+                })
+                td.setAttribute("onmouseover", "hover('" + team + "')")
+                td.setAttribute("onclick", "clicked('" + team + "')")
+                td.setAttribute("team", team)
             }
         } else {
             var index = titles.indexOf(title)
@@ -169,13 +210,49 @@ function eventstats() {
                 var row = tbl.insertRow()
                 var td = row.insertCell()
                 td.innerText = arr[i]
+                var team = arr[i].split(":")[0].slice(4)
+                td.setAttribute("onmouseover", "hover('" + team + "')")
+                td.setAttribute("onmouseleave", "onleave('" + team + "')")
+                document.addEventListener("keydown", (event) => {
+                    var key = event.altKey
+                    var table = document.getElementById("table")
+                    if (key == true && table !== null) {
+                        for (a = 0; a < table.rows.length; a++) {
+                            for (b = 0; b < table.rows[a].cells.length; b++) {
+                                if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                                    table.rows[a].cells[b].setAttribute("style", "background-color:red")
+                                }
+                            }
+                        }
+                    }
+                })
+                document.addEventListener("keyup", (event) => {
+                    var table = document.getElementById("table")
+                    if (table !== null) {
+                        for (a = 0; a < table.rows.length; a++) {
+                            for (b = 0; b < table.rows[a].cells.length; b++) {
+                                if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                                    table.rows[a].cells[b].removeAttribute("style")
+                                }
+                            }
+                        }
+                    }
+                })
+                td.setAttribute("onmouseover", "hover('" + team + "')")
+                td.setAttribute("onclick", "clicked('" + team + "')")
+                td.setAttribute("team", team)
             }
         }
         div.appendChild(tbl)
         document.getElementById("extras").appendChild(div)
     }
     this.general = function () {
-        var override = document.getElementById("override").value.replaceAll(" ", "").split(",")
+        var override = document.getElementById("override").value.replaceAll(" ", ",").replaceAll("\t", ",").replaceAll("\n", ",").split(",")
+        override.forEach(function (element, i) {
+            if (element == "") {
+                override.splice(i, 1)
+            }
+        })
         var rankings = JSON.parse(sessionStorage.getItem("rankings"))
         var event = sessionStorage.getItem("event")
         var keys = []
@@ -190,6 +267,10 @@ function eventstats() {
                 keys.push("frc" + element)
             })
         }
+        var picked = JSON.parse(sessionStorage.getItem("picked"))
+        picked.forEach(function (element) {
+            keys.splice(keys.indexOf("frc" + element), 1)
+        })
         for (a = 0; a < rankings.rankings.length; a++) {
             if (keys.indexOf(rankings.rankings[a].team_key) == -1) {
                 rankings.rankings.splice(a, 1)
@@ -252,7 +333,6 @@ function eventstats() {
             }
             output.push(arr)
         }
-        console.log(scouting)
         if (scouting !== null) {
             var keys = scouting.rows
             var titles = scouting.titles
@@ -296,7 +376,7 @@ function eventstats() {
                         var val = sorted[i]
                         var index = values.indexOf(val)
                         if (!isNaN(+val)) {
-                            if (act == "percentTrue" || act == "percentFalse"){
+                            if (act == "percentTrue" || act == "percentFalse") {
                                 val = (Math.floor(val * 100)) + "%"
                             } else {
                                 val = Math.floor(val * 100) / 100
@@ -318,6 +398,32 @@ function eventstats() {
                     td.innerText = output[b][a]
                     var team = output[b][a].split(":")[0].slice(4)
                     td.setAttribute("onmouseover", "hover('" + team + "')")
+                    td.setAttribute("onmouseleave", "onleave('" + team + "')")
+                    document.addEventListener("keydown", (event) => {
+                        var key = event.altKey
+                        var table = document.getElementById("table")
+                        if (key == true && table !== null) {
+                            for (a = 0; a < table.rows.length; a++) {
+                                for (b = 0; b < table.rows[a].cells.length; b++) {
+                                    if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                                        table.rows[a].cells[b].setAttribute("style", "background-color:red")
+                                    }
+                                }
+                            }
+                        }
+                    })
+                    document.addEventListener("keyup", (event) => {
+                        var table = document.getElementById("table")
+                        if (table !== null) {
+                            for (a = 0; a < table.rows.length; a++) {
+                                for (b = 0; b < table.rows[a].cells.length; b++) {
+                                    if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                                        table.rows[a].cells[b].removeAttribute("style")
+                                    }
+                                }
+                            }
+                        }
+                    })
                     td.setAttribute("onclick", "clicked('" + team + "')")
                     td.setAttribute("team", team)
                 }
@@ -327,7 +433,12 @@ function eventstats() {
         document.getElementById("extras").appendChild(div)
     }
     this.avgInit = function () {
-        var override = document.getElementById("override").value.replaceAll(" ", "").split(",")
+        var override = document.getElementById("override").value.replaceAll(" ", ",").replaceAll("\t", ",").replaceAll("\n", ",").split(",")
+        override.forEach(function (element, i) {
+            if (element == "") {
+                override.splice(i, 1)
+            }
+        })
         var keys = []
         var event = sessionStorage.getItem("event")
         if (!override || override.length == 1) {
@@ -337,6 +448,7 @@ function eventstats() {
                 keys.push("frc" + element)
             })
         }
+        sessionStorage.setItem("picked", "[]")
         var arr = {}
         var year
         if (document.getElementById("ovrYear").value !== "") {
@@ -377,6 +489,11 @@ function eventstats() {
         }
         var parsed = JSON.parse(sessionStorage.getItem("avg"))
         var keys = Object.keys(parsed)
+        var picked = JSON.parse(sessionStorage.getItem("picked"))
+        picked.forEach(function (element) {
+            keys.splice(keys.indexOf("frc" + element), 1)
+            delete parsed[element]
+        })
         var choices = Object.keys(parsed[keys[0]][0])
         var output = []
         var teams = []
@@ -456,6 +573,32 @@ function eventstats() {
                     td.innerText = final[b][a]
                     var team = final[b][a].split(":")[0].slice(4)
                     td.setAttribute("onmouseover", "hover('" + team + "')")
+                    td.setAttribute("onmouseleave", "onleave('" + team + "')")
+                    document.addEventListener("keydown", (event) => {
+                        var key = event.altKey
+                        var table = document.getElementById("table")
+                        if (key == true && table !== null) {
+                            for (a = 0; a < table.rows.length; a++) {
+                                for (b = 0; b < table.rows[a].cells.length; b++) {
+                                    if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                                        table.rows[a].cells[b].setAttribute("style", "background-color:red")
+                                    }
+                                }
+                            }
+                        }
+                    })
+                    document.addEventListener("keyup", (event) => {
+                        var table = document.getElementById("table")
+                        if (table !== null) {
+                            for (a = 0; a < table.rows.length; a++) {
+                                for (b = 0; b < table.rows[a].cells.length; b++) {
+                                    if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                                        table.rows[a].cells[b].removeAttribute("style")
+                                    }
+                                }
+                            }
+                        }
+                    })
                     td.setAttribute("onclick", "clicked('" + team + "')")
                     td.setAttribute("team", team)
                 }
@@ -494,6 +637,36 @@ function eventstats() {
                 var td = row.insertCell()
                 td.innerText = item[a]
                 var team = item[a].split(":")[0].slice(4)
+                td.setAttribute("onmouseover", "hover('" + team + "')")
+                td.setAttribute("onmouseleave", "onleave('" + team + "')")
+                document.addEventListener("keydown", (event) => {
+                    var key = event.altKey
+                    var table = document.getElementById("table")
+                    if (key == true && table !== null) {
+                        for (a = 0; a < table.rows.length; a++) {
+                            for (b = 0; b < table.rows[a].cells.length; b++) {
+                                if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                                    table.rows[a].cells[b].setAttribute("style", "background-color:red")
+                                }
+                            }
+                        }
+                    }
+                })
+                document.addEventListener("keyup", (event) => {
+                    var table = document.getElementById("table")
+                    if (table !== null) {
+                        for (a = 0; a < table.rows.length; a++) {
+                            for (b = 0; b < table.rows[a].cells.length; b++) {
+                                if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                                    table.rows[a].cells[b].removeAttribute("style")
+                                }
+                            }
+                        }
+                    }
+                })
+                td.setAttribute("onmouseover", "hover('" + team + "')")
+                td.setAttribute("onclick", "clicked('" + team + "')")
+                td.setAttribute("team", team)
             }
         }
         div.appendChild(tbl)

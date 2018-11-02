@@ -1,7 +1,8 @@
-String.prototype.replaceAll = function(search, replacement) {
+String.prototype.replaceAll = function (search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
 };
+
 function getTBA(url) {
     return JSON.parse($.ajax({
         url: "https://www.thebluealliance.com/api/v3/" + url,
@@ -76,7 +77,7 @@ function readFile(evt) {
 
 function menu() {
     document.getElementById("extras").innerHTML = ""
-    document.getElementById('menu').hidden = false
+    $("#menu").fadeIn(250)
     sessionStorage.clear()
     var bin = document.getElementById("messages")
     bin.innerText = "Welcome to Amon Green's WebScout!\nCheck \"Help\" for more info."
@@ -89,8 +90,7 @@ function evt(item) {
 
 function getEvent(func) {
     var checkbox = document.getElementById("non?").checked
-    var sidenav = document.getElementById("menu")
-    sidenav.hidden = true
+    $("#menu").fadeOut(150)
     if (checkbox == false) {
         document.getElementById("extras").innerHTML +=
             '<input type="text" id="event" style="margin-left:10px;margin-top:10px" placeholder="Event key (i.e. 2018milin)">'
@@ -111,8 +111,7 @@ function getEvent(func) {
 }
 
 function getTeam(func) {
-    var sidenav = document.getElementById("menu")
-    sidenav.hidden = true
+    $("#menu").fadeOut(150)
     document.getElementById("extras").innerHTML +=
         '<input type="text" id="team" style="margin-left:10px;margin-top:10px" placeholder="Team number (i.e. 5530)">'
     var button = document.createElement("BUTTON");
@@ -124,8 +123,7 @@ function getTeam(func) {
 }
 
 function getYear(func) {
-    var sidenav = document.getElementById("menu")
-    sidenav.hidden = true
+    $("#menu").fadeOut(150)
     document.getElementById("extras").innerHTML +=
         '<input type="text" id="year" style="margin-left:10px;margin-top:10px" placeholder="Year (i.e. 2018)">'
     var button = document.createElement("BUTTON");
@@ -159,26 +157,82 @@ function hideMes() {
 }
 
 function hover(team) {
+    var e = window.event
     var table = document.getElementById("table")
+    var data = ""
     for (a = 0; a < table.rows.length; a++) {
         for (b = 0; b < table.rows[a].cells.length; b++) {
             if (team == table.rows[a].cells[b].getAttribute("team") && table.rows[a].cells[b].getAttribute("class") !== "clicked") {
                 table.rows[a].cells[b].setAttribute("class", "hovered")
+                if (e.altKey) {
+                    table.rows[a].cells[b].setAttribute("style", "background-color:red")
+                }
             } else if (table.rows[a].cells[b].getAttribute("class") == "hovered") {
                 table.rows[a].cells[b].removeAttribute("class")
+                table.rows[a].cells[b].removeAttribute("style")
+            }
+
+        }
+    }
+    for (a = 0; a < table.rows[0].cells.length; a++) {
+        for (b = 0; b < table.rows.length; b++) {
+            if (team == table.rows[b].cells[a].getAttribute("team") && table.rows[b].cells[a].getAttribute("class") == "hovered") {
+                var value = table.rows[b].cells[a].innerText
+                value = value.replace("FRC " + team + ": ", "")
+                data += (table.rows[0].cells[a].innerText + ": " + value + "\n")
+            }
+        }
+    }
+    for (a = 0; a < table.rows[0].cells.length; a++) {
+        for (b = 0; b < table.rows.length; b++) {
+            if (team == table.rows[b].cells[a].getAttribute("team") && table.rows[b].cells[a].getAttribute("class") == "hovered") {
+                table.rows[b].cells[a].setAttribute("title", data)
+            }
+        }
+    }
+}
+
+function onpress(team) {
+    var e = window.event
+    if (e.altKey) {
+        var table = document.getElementById("table")
+        for (a = 0; a < table.rows.length; a++) {
+            for (b = 0; b < table.rows[a].cells.length; b++) {
+                if (team == table.rows[a].cells[b].getAttribute("team") && table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                    table.rows[a].cells[b].setAttribute("style", "background-color:red")
+                }
+            }
+        }
+    }
+}
+
+function onleave(team) {
+    var table = document.getElementById("table")
+    for (a = 0; a < table.rows.length; a++) {
+        for (b = 0; b < table.rows[a].cells.length; b++) {
+            if (team == table.rows[a].cells[b].getAttribute("team") && table.rows[a].cells[b].getAttribute("class") == "hovered") {
+                table.rows[a].cells[b].removeAttribute("class")
+                table.rows[a].cells[b].removeAttribute("style")
             }
         }
     }
 }
 
 function clicked(team) {
-    var table = document.getElementById("table")
-    for (a = 0; a < table.rows.length; a++) {
-        for (b = 0; b < table.rows[a].cells.length; b++) {
-            if (team == table.rows[a].cells[b].getAttribute("team") && table.rows[a].cells[b].getAttribute("class") !== "clicked") {
-                table.rows[a].cells[b].setAttribute("class", "clicked")
-            } else if (team == table.rows[a].cells[b].getAttribute("team") && table.rows[a].cells[b].getAttribute("class") == "clicked") {
-                table.rows[a].cells[b].removeAttribute("class")
+    var e = window.event
+    if (e.altKey) {
+        delClick(team)
+    } else {
+        var table = document.getElementById("table")
+        for (a = 0; a < table.rows.length; a++) {
+            for (b = 0; b < table.rows[a].cells.length; b++) {
+                if (team == table.rows[a].cells[b].getAttribute("team") && table.rows[a].cells[b].getAttribute("class") !== "clicked") {
+                    table.rows[a].cells[b].setAttribute("class", "clicked")
+                    table.rows[a].cells[b].removeAttribute("style")
+                } else if (team == table.rows[a].cells[b].getAttribute("team") && table.rows[a].cells[b].getAttribute("class") == "clicked") {
+                    table.rows[a].cells[b].removeAttribute("class")
+                    table.rows[a].cells[b].removeAttribute("style")
+                }
             }
         }
     }
@@ -197,13 +251,13 @@ function delClick(team) {
     }
     addMes("\n" + team + " was picked!")
     if (headings.length > 1 && names.indexOf("Season Averages") > -1) {
-        new alliance().general()
+        new eventstats().general()
     } else if (headings.length == 1 && names.indexOf("Season Averages") > -1) {
-        new alliance().item(headings.item(0).innerText)
+        new eventstats().item(headings.item(0).innerText)
     } else if (headings.length > 1 && names.indexOf("Season Averages") == -1) {
-        new alliance().avgGeneral()
+        new eventstats().avgGeneral()
     } else if (headings.length == 1 && names.indexOf("Season Averages") == -1) {
-        new alliance().avgItem(headings.item(0).innerText)
+        new eventstats().avgItem(headings.item(0).innerText)
     }
 }
 

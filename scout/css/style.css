@@ -116,7 +116,7 @@ body {
     left: 0;
     background-color: #111;
     background-clip: content-box;
-    z-index: 99;
+    z-index: 100;
     overflow-y: scroll;
     padding-right: 25px;
 }
@@ -152,6 +152,7 @@ body {
 }
 
 table.blueTable {
+    z-index: 99;
     background-color: #EEEEEE;
     text-align: left;
     border-collapse: collapse;
@@ -183,12 +184,14 @@ table.blueTable {
 
 table.blueTable td,
 table.blueTable th {
+    z-index: 99;
     border: 1px solid #AAAAAA;
     padding: 3px 25px 3px 0;
     white-space: nowrap;
 }
 
 table.blueTable tbody td {
+    z-index: 99;
     padding: 3px 25px 3px 0;
     text-align: left;
     font-size: 13px;
@@ -196,15 +199,18 @@ table.blueTable tbody td {
 }
 
 table.blueTable tr:nth-child(even) {
+    z-index: 99;
     background: #ffedcc;
 }
 
 table.blueTable thead {
+    z-index: 99;
     background: #8282FF;
     border-bottom: 2px solid #444444;
 }
 
 table.blueTable thead th {
+    z-index: 99;
     font-size: 15px;
     font-weight: bold;
     color: #FFFFFF;
@@ -212,6 +218,7 @@ table.blueTable thead th {
 }
 
 table.blueTable thead th:first-child {
+    z-index: 99;
     border-left: none;
 }
 
