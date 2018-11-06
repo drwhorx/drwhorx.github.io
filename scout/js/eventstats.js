@@ -51,7 +51,7 @@ function eventstats() {
         var rankings = JSON.parse(sessionStorage.getItem("rankings"))
         var event = sessionStorage.getItem("event")
         var keys = []
-        if (!override || override.length == 1) {
+        if (!override || override.length == 0) {
             keys = getEventTeamsKeys(event)
         } else {
             override.forEach(function (element) {
@@ -260,7 +260,7 @@ function eventstats() {
         if (scouting !== null) {
             scouting = JSON.parse(scouting)
         }
-        if (!override || override.length == 1) {
+        if (!override || override.length == 0) {
             keys = getEventTeamsKeys(event)
         } else {
             override.forEach(function (element) {
@@ -441,7 +441,7 @@ function eventstats() {
         })
         var keys = []
         var event = sessionStorage.getItem("event")
-        if (!override || override.length == 1) {
+        if (!override || override.length == 0) {
             keys = getEventTeamsKeys(event)
         } else {
             override.forEach(function (element) {
