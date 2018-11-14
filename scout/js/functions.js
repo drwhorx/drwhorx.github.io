@@ -177,9 +177,9 @@ function hover(team) {
     for (a = 0; a < table.rows[0].cells.length; a++) {
         for (b = 0; b < table.rows.length; b++) {
             if (team == table.rows[b].cells[a].getAttribute("team") && table.rows[b].cells[a].getAttribute("class") == "hovered") {
-                var value = table.rows[b].cells[a].innerText
+                var value = table.rows[b].cells[a].innerText.slice(0)
                 value = value.replace("FRC " + team + ": ", "")
-                data += (table.rows[0].cells[a].innerText + ": " + value + "\n")
+                data += (table.rows[0].cells[a].innerText.replaceAll("\t", "") + ": " + value + "\n")
             }
         }
     }

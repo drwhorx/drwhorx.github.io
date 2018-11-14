@@ -17,6 +17,9 @@ function writeJSON(data) {
     })
 }
 
-function click(date) {
-    console.log(document.getElementById("date" + date).offsetTop)
+function clicked(date) {
+    var top = document.getElementById("date" + date).offsetTop
+    document.getElementById("popup").hidden = false
+    document.getElementById("popup").setAttribute("style", "margin-top:" + top + "px")
+    
 }

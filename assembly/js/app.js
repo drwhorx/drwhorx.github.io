@@ -23,7 +23,7 @@ window.onload = function () {
         var td = row.insertCell()
         if (row.cells.length > wd) {
             td.innerText = i
-            td.setAttribute("onclick", "click('" + i + "')")
+            td.setAttribute("onclick", "clicked('" + i + "')")
             td.setAttribute("id", "date" + i)
         } else {
             td.innerText = ""

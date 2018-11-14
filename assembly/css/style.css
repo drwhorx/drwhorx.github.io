@@ -7,6 +7,7 @@ table.calendar {
     margin-bottom: 100px;
     overflow: scroll;
 }
+
 table.calendar td,
 table.calendar th {
     z-index: 99;
@@ -16,6 +17,7 @@ table.calendar th {
     text-align: center;
     width: 75px;
 }
+
 table.calendar caption {
     background-color: #EEEEEE;
     z-index: 99;
@@ -67,4 +69,18 @@ table.calendar thead th {
 table.calendar thead th:first-child {
     z-index: 99;
     border-left: none;
+}
+
+#popup {
+    margin-left: 750px;
+    top: 15px;
+    position: fixed;
+    width: 300px;
+    height: 200px;
+    border: 1px solid #000000;
+    z-index: 99;
+    background-color: #FFFFFF;
+    border: 2px solid #ccc;
+    text-decoration: none;
+    border-radius: 4px;
 }

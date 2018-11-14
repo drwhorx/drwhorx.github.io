@@ -71,7 +71,7 @@ function eventopr() {
         document.getElementById("extras").removeChild(document.getElementById("eventSub"))
         var side = document.createElement("DIV");
         side.setAttribute('class', 'sidenav')
-        side.innerHTML += '<p onclick="menu()">Menu</p>'
+        side.innerHTML += '<p onclick="new eventopr().avginit()">Season Averages</p><p onclick="menu()">Menu</p>'
         document.getElementById("extras").appendChild(side)
         var div = document.createElement("DIV")
         div.setAttribute("class", "table")
