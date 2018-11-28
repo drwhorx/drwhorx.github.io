@@ -37,9 +37,9 @@ function eventstats() {
                     '</p>'
             }
             html += '<p onclick="new eventstats().general()">General</p>'
+            html += '<p onclick="new eventstats().teamkeys()">Team Numbers</p>'
         }
         html += '<p onclick="new eventstats().avgInit()">Season Averages</p>'
-        html += '<p onclick="new eventstats().teamkeys()">Team Numbers</p>'
         html += '<p onclick="menu()">Menu</p>'
         side.innerHTML += html
         document.getElementById("extras").appendChild(side)
