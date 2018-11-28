@@ -19,6 +19,7 @@ function getEventRankings(eventkey) {
     return getTBA('event/' + eventkey + '/rankings');
 }
 
+
 function getTeamEventListKeys(num, year) {
     return getTBA('team/frc' + num + '/events' + (year === undefined ? '' : '/' + year) + '/keys');
 }
@@ -76,6 +77,7 @@ function readFile(evt) {
 }
 
 function menu() {
+    document.getElementById("searchDiv").hidden = true
     document.getElementById("extras").innerHTML = ""
     $("#menu").fadeIn(250)
     sessionStorage.clear()

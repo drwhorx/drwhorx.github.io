@@ -1,5 +1,6 @@
 function eventstats() {
     this.init = function () {
+        document.getElementById("searchDiv").hidden = false
         sessionStorage.setItem("picked", "[]")
         var checkbox = document.getElementById("non?").checked
         var event
@@ -8,6 +9,7 @@ function eventstats() {
         var scouting
         if (checkbox == false) {
             event = document.getElementById("event").value
+            sessionStorage.setItem("event", event)
             scouting = localStorage.getItem("scout" + event)
             document.getElementById("extras").removeChild(document.getElementById("event"))
             document.getElementById("extras").removeChild(document.getElementById("eventSub"))
@@ -37,9 +39,16 @@ function eventstats() {
             html += '<p onclick="new eventstats().general()">General</p>'
         }
         html += '<p onclick="new eventstats().avgInit()">Season Averages</p>'
+        html += '<p onclick="new eventstats().teamkeys()">Team Numbers</p>'
         html += '<p onclick="menu()">Menu</p>'
         side.innerHTML += html
         document.getElementById("extras").appendChild(side)
+    }
+
+    this.teamkeys = function () {
+        var event = sessionStorage.getItem("event")
+        var teams = getEventTeamsKeys(event).join("\n").replaceAll("frc", "")
+        addMes("\n\n" + teams)
     }
     this.item = function (title) {
         var override = document.getElementById("override").value.replaceAll(" ", ",").replaceAll("\t", ",").replaceAll("\n", ",").split(",")
