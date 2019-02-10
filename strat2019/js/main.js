@@ -1,10 +1,16 @@
 // use json file as website structure, then use a variable as current subnav
+function checkPeriod() {
+    var arr = ["Auton", ""]
+}
 window.onload = function () {
     sessionStorage.setItem("color", "black")
+    var request = new XMLHttpRequest();
+    request.open("GET", "structure.json", false);
+    request.send(null);
+    console.log(request.responseText)
 }
 function color(obj) {
     sessionStorage.setItem("color", obj.id)
-
 }
 function initDraw() {
     const canvas = document.querySelector('#main');

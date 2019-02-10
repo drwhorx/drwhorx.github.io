@@ -13,7 +13,7 @@ body, html {
     width: 10px;
     display: inline-block;
 }
-#main {
+.canvas {
     background-image: url("field.jpeg");
     z-index: 1;
     width: 100%;
