@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<title>Amon Green's WebStrat</title>
+
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <meta charset="utf-8">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Amon Green's WebStrat" />
+    <meta property="og:description" content="Team 5530's Web Strategy for 2019" />
+    <meta property="og:image" content="https://www.firstinspires.org/sites/default/files/uploads/resource_library/brand/FIRSTicon_RGB_withTM.jpg" />
+    <link rel="icon" href="https://www.firstinspires.org/sites/default/files/uploads/resource_library/brand/FIRSTicon_RGB_withTM.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <canvas id="main" class="main"></canvas>
+    <div id="pallette">
+        <div id="black" style="background-color: black" onclick="color(this)"></div>
+        <div id="blue" style="background-color: blue" onclick="color(this)"></div>
+        <div id="red" style="background-color: red" onclick="color(this)"></div>
+        <div id="green" style="background-color: green" onclick="color(this)"></div>
+        <div id="rgba(255,0,0,0)" style="background-image: url('https://opengameart.org/sites/default/files/Transparency500.png')" onclick="color(this)"></div>
+    </div>
+    <script>
+        initDraw()
+    </script>
+</body>

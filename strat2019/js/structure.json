@@ -1,0 +1,35 @@
+{
+    "Auton" : {
+        "Level 2 Start (1)": {
+            "x": 100,
+            "y": 100,
+            "align": "left"
+        },
+        "Level 2 Start (2)": {
+            "x": 100,
+            "y": 100,
+            "align": "left"
+        },
+        "Level 1 Start (1)": {
+            "x": 100,
+            "y": 100,
+            "align": "left"
+        },
+        "Level 1 Start (2)": {
+            "x": 100,
+            "y": 100,
+            "align": "left"
+        },
+        "Level 1 Start (3)": {
+            "x": 100,
+            "y": 100,
+            "align": "left"
+        }
+    },
+    "Teleop" : {
+
+    },
+    "Endgame" : {
+
+    }
+}
