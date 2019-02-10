@@ -1,27 +1,34 @@
 // use json file as website structure, then use a variable as current subnav
-function checkPeriod() {
-    var arr = ["Auton", ""]
-}
 window.onload = function () {
-    sessionStorage.setItem("color", "black")
-    var request = new XMLHttpRequest();
-    request.open("GET", "organize.json", false);
-    request.send(null);
-    console.log(request.responseText)
+    var data = $.getJSON("organize.json")
+    console.log(data)
+    setInterval(function checkPeriod() {
+        var arr = ["Auton", "Teleop", "Endgame"]
+        var i = arr.indexOf($("#gameStatus").val())
+        document.getElementById(arr[i] + "Canvas").removeAttribute("hidden")
+        arr.splice(i, 1)
+        document.getElementById(arr[0] + "Canvas").hidden = true
+        document.getElementById(arr[1] + "Canvas").hidden = true
+    }, 100)
 }
 function color(obj) {
     sessionStorage.setItem("color", obj.id)
 }
 function initDraw() {
-    const canvas = document.querySelector('#main');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = "black";
+    const ctx = []
+    const canvas = []
+    const arr = ["Auton", "Teleop", "Endgame"]
+    for (i = 0; i < arr.length; i++) {
+        var element = document.querySelector("#" + arr[i] + "Canvas");
+        element.width = window.innerWidth;
+        element.height = window.innerHeight;
+        canvas[i] = element
+        ctx[i] = element.getContext('2d');
+        ctx[i].lineJoin = 'round';
+        ctx[i].lineCap = 'round';
+        ctx[i].lineWidth = 5;
+        ctx[i].strokeStyle = "black";
+    }
 
     let isDrawing = false;
     let lastX = 0;
@@ -29,20 +36,23 @@ function initDraw() {
 
     function draw(e) {
         if (!isDrawing) return;
-        ctx.beginPath();
-        ctx.moveTo(lastX, lastY);
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.stroke();
+        var i = arr.indexOf($("#gameStatus").val())
+        ctx[i].beginPath();
+        ctx[i].moveTo(lastX, lastY);
+        ctx[i].lineTo(e.offsetX, e.offsetY);
+        ctx[i].stroke();
         [lastX, lastY] = [e.offsetX, e.offsetY];
     }
 
-    canvas.addEventListener('mousedown', (e) => {
-        ctx.strokeStyle = sessionStorage.getItem("color");
-        isDrawing = true;
-        [lastX, lastY] = [e.offsetX, e.offsetY];
-    });
-
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', () => isDrawing = false);
-    canvas.addEventListener('mouseout', () => isDrawing = false);
+    for (i = 0; i < canvas.length; i++) {
+        canvas[i].addEventListener('mousedown', (e) => {
+            var i = arr.indexOf($("#gameStatus").val())
+            ctx[i].strokeStyle = sessionStorage.getItem("color");
+            isDrawing = true;
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        });
+        canvas[i].addEventListener('mousemove', draw);
+        canvas[i].addEventListener('mouseup', () => isDrawing = false);
+        canvas[i].addEventListener('mouseout', () => isDrawing = false);
+    }
 }
