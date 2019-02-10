@@ -5,7 +5,7 @@ function checkPeriod() {
 window.onload = function () {
     sessionStorage.setItem("color", "black")
     var request = new XMLHttpRequest();
-    request.open("GET", "structure.json", false);
+    request.open("GET", "organize.json", false);
     request.send(null);
     console.log(request.responseText)
 }
