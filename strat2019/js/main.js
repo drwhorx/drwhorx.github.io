@@ -11,7 +11,7 @@ window.onload = function () {
                 element.setAttribute("id", keys[b])
                 element.width = "25px"
                 element.height = "10px"
-                element.style = "font-size: 8px; left: " + data[arr[i]][keys[b]].x + "px; top: " + data[arr[i]][keys[b]].y + "; position: absolute"
+                element.style = "font-size: 8px; left: " + data[arr[i]][keys[b]].x + "px; top: " + data[arr[i]][keys[b]].y + "px; position: absolute"
                 element.placeholder = keys[b]
                 document.getElementById("items").appendChild(element)
             }
