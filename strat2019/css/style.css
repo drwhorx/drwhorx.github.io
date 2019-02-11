@@ -29,7 +29,15 @@ body, html {
     height: 25px;
     position: absolute;
 }
-input[type=text], select {
+input[type=text] {
+    height: 15px;
+    position: absolute;
+    font-size: 12px;
+    background-color: #333333;
+    color: white;
+}
+select {
+    font-size: 12px;
     background-color: #333333;
     color: white;
 }

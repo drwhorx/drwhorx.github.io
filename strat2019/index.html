@@ -16,19 +16,25 @@
 </head>
 
 <body>
-    <canvas id="AutonCanvas" class="canvas"></canvas>
+    <canvas id="SandstormCanvas" class="canvas"></canvas>
     <canvas id="TeleopCanvas" class="canvas" hidden></canvas>
     <canvas id="EndgameCanvas" class="canvas" hidden></canvas>
     <table id="topnav">
         <tbody>
             <tr>
-                <td style="width: 100px">
+                <td style="width: 90px">
                     <select id="gameStatus">
-                        <option>Auton</option>
+                        <option>Sandstorm</option>
                         <option>Teleop</option>
                         <option>Endgame</option>
                     </select>
                 </td>
+                <td style="width: 60px">
+                        <select id="alliance">
+                            <option>Red</option>
+                            <option>Blue</option>
+                        </select>
+                    </td>
                 <td>
                     <div id="pallette">
                         <div id="black" style="background-color: black" onclick="color(this)"></div>
@@ -41,7 +47,7 @@
             </tr>
         </tbody>
     </table>
-    <div id="items" style="position: absolute; left: 0; top: 0; height: 10px; width: 10px">
+    <div id="items" style="position: absolute; left: 0; top: 0; height: 10px; width: 100%;">
     </div>
     <script>
         initDraw()
