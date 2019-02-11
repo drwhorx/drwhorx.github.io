@@ -1,8 +1,8 @@
 {
     "Auton" : {
         "Level 2 Start (1)": {
-            "x": 100,
-            "y": 100,
+            "x": 600,
+            "y": 200,
             "opts": []
         },
         "Level 2 Start (2)": {
