@@ -1,7 +1,7 @@
 // use json file as website structure, then use a variable as current subnav
 window.onload = function () {
-    var data = $.getJSON("./organize.json")
-    console.log(data)
+    var data = $.getJSON("drwhorx.github.io/strat2019/js/organize.json")
+    console.log(data.responseText)
     setInterval(function checkPeriod() {
         var arr = ["Auton", "Teleop", "Endgame"]
         var i = arr.indexOf($("#gameStatus").val())
