@@ -1,6 +1,6 @@
 // use json file as website structure, then use a variable as current subnav
 window.onload = function () {
-    var data = $.getJSON("organize.json")
+    var data = $.getJSON("./organize.json")
     console.log(data)
     setInterval(function checkPeriod() {
         var arr = ["Auton", "Teleop", "Endgame"]
