@@ -1,14 +1,14 @@
 // use json file as website structure, then use a variable as current subnav
 window.onload = function () {
     $.getJSON("https://drwhorx.github.io/strat2019/js/organize.json", function (data) {
-        sessionStorage.setItem("data", data)
-        var arr = ["Auton", "Teleop", "Endgame"]
+        sessionStorage.setItem("data", JSON.stringify(data))
+        const arr = Object.keys(data)
         for (i = 0; i < arr.length; i++) {
             var keys = Object.keys(data[arr[i]])
             for (b = 0; b < keys.length; b++) {
                 var element = document.createElement("input")
                 element.setAttribute("type", "text")
-                element.setAttribute("id", keys[b])
+                element.setAttribute("cat", arr[i])
                 element.width = "25px"
                 element.height = "10px"
                 element.style = "font-size: 8px; left: " + data[arr[i]][keys[b]].x + "px; top: " + data[arr[i]][keys[b]].y + "px; position: absolute"
@@ -18,24 +18,21 @@ window.onload = function () {
         }
     })
     setInterval(function checkPeriod() {
-        var arr = ["Auton", "Teleop", "Endgame"]
+        var arr = Object.keys(JSON.parse(sessionStorage.getItem("data")))
         var i = arr.indexOf($("#gameStatus").val())
         document.getElementById(arr[i] + "Canvas").removeAttribute("hidden")
         arr.splice(i, 1)
         document.getElementById(arr[0] + "Canvas").hidden = true
         document.getElementById(arr[1] + "Canvas").hidden = true
-
-        $.getJSON("https://drwhorx.github.io/strat2019/js/organize.json", function (data) {
-            var status = $("#gameStatus").val()
-            var children = document.getElementById("items").children
-            for (i = 0; i < children.length; i++) {
-                if (data[status][children[i].id] == undefined) {
-                    children[i].hidden = true
-                } else {
-                    children[i].hidden = false
-                }
+        var status = $("#gameStatus").val()
+        var children = document.getElementById("items").children
+        for (i = 0; i < children.length; i++) {
+            if (children[i].getAttribute("cat") != status) {
+                children[i].hidden = true
+            } else {
+                children[i].hidden = false
             }
-        })
+        }
     }, 100)
 }
 function color(obj) {
@@ -44,7 +41,7 @@ function color(obj) {
 function initDraw() {
     const ctx = []
     const canvas = []
-    const arr = ["Auton", "Teleop", "Endgame"]
+    const arr = Object.keys(JSON.parse(sessionStorage.getItem("data")))
     for (i = 0; i < arr.length; i++) {
         var element = document.querySelector("#" + arr[i] + "Canvas");
         element.width = window.innerWidth;

@@ -1,5 +1,6 @@
 body, html {
     height: auto;
+    background-color: #333333;
 }
 #pallette {
     width: 75px;
@@ -27,4 +28,8 @@ body, html {
     top: 12.5%;
     height: 25px;
     position: absolute;
+}
+input[type=text], select {
+    background-color: #333333;
+    color: white;
 }
