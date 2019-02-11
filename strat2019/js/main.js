@@ -1,7 +1,22 @@
 // use json file as website structure, then use a variable as current subnav
 window.onload = function () {
-    var data = $.getJSON("https://drwhorx.github.io/strat2019/js/organize.json")
-    console.log(data.responseJSON)
+    $.getJSON("https://drwhorx.github.io/strat2019/js/organize.json", function (data) {
+        sessionStorage.setItem("data", data)
+        var arr = ["Auton", "Teleop", "Endgame"]
+        for (i = 0; i < arr.length; i++) {
+            var keys = Object.keys(data[arr[i]])
+            for (b = 0; b < keys.length; b++) {
+                var element = document.createElement("input")
+                element.setAttribute("type", "text")
+                element.setAttribute("id", keys[b])
+                element.width = "25px"
+                element.height = "10px"
+                element.style = "font-size: 8px; left: " + data[arr[i]][keys[b]].x + "px; top: " + data[arr[i]][keys[b]].y + "; position: absolute"
+                element.placeholder = keys[b]
+                document.getElementById("items").appendChild(element)
+            }
+        }
+    })
     setInterval(function checkPeriod() {
         var arr = ["Auton", "Teleop", "Endgame"]
         var i = arr.indexOf($("#gameStatus").val())
@@ -9,6 +24,18 @@ window.onload = function () {
         arr.splice(i, 1)
         document.getElementById(arr[0] + "Canvas").hidden = true
         document.getElementById(arr[1] + "Canvas").hidden = true
+
+        $.getJSON("https://drwhorx.github.io/strat2019/js/organize.json", function (data) {
+            var status = $("#gameStatus").val()
+            var children = document.getElementById("items").children
+            for (i = 0; i < children.length; i++) {
+                if (data[status][children[i].id] == undefined) {
+                    children[i].hidden = true
+                } else {
+                    children[i].hidden = false
+                }
+            }
+        })
     }, 100)
 }
 function color(obj) {
