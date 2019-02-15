@@ -5,6 +5,8 @@
 <head>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/functions.js"></script>
     <script src="js/main.js"></script>
     <meta charset="utf-8">
     <meta property="og:type" content="website">
@@ -19,23 +21,25 @@
     <canvas id="SandstormCanvas" class="canvas"></canvas>
     <canvas id="TeleopCanvas" class="canvas" hidden></canvas>
     <canvas id="EndgameCanvas" class="canvas" hidden></canvas>
-    <table id="topnav">
+    <canvas id="DataCanvas" class="canvas" hidden></canvas>
+    <table id="topnav" style="table-layout:fixed;">
         <tbody>
             <tr>
-                <td style="width: 90px">
+                <td style="width: 90px; display:inline-block">
                     <select id="gameStatus">
                         <option>Sandstorm</option>
                         <option>Teleop</option>
                         <option>Endgame</option>
                     </select>
                 </td>
-                <td style="width: 60px">
-                        <select id="alliance">
-                            <option>Red</option>
-                            <option>Blue</option>
-                        </select>
-                    </td>
-                <td>
+                <td style="width: 76px; display:inline-block">
+                    <select id="alliance">
+                        <option>Red</option>
+                        <option>Blue</option>
+                        <option>Add Data</option>
+                    </select>
+                </td>
+                <td style="width: 61px; display:inline-block">
                     <div id="pallette">
                         <div id="black" style="background-color: black" onclick="color(this)"></div>
                         <div id="blue" style="background-color: blue" onclick="color(this)"></div>
@@ -44,9 +48,61 @@
                         <div id="white" style="background-color: white" onclick="color(this)"></div>
                     </div>
                 </td>
+                <td style="width: 55px; display:inline-block; padding-left: 5px">
+                    <select id="theme">
+                        <option>Dark</option>
+                        <option>Light</option>
+                    </select>
+                </td>
+                <td style="width: 50px; display:inline-block">
+                    <input type="text" class="RedBot" id="rbot1" placeholder="R Bot1">
+                    <input type="text" id="dataBot" placeholder="Team #" style="width: 50px; top: 3px" hidden>
+                </td>
+                <td style="width: 50px; display:inline-block">
+                    <input type="text" class="RedBot" id="rbot2" placeholder="R Bot2">
+                    <button id="submit" style="width: 57px !important; left: 0px !important;" hidden onclick="submit()">Submit!</button>
+                </td>
+                <td style="width: 50px; display:inline-block">
+                    <input type="text" class="RedBot" id="rbot3" placeholder="R Bot3">
+                </td>
+                <td style="width: 105px; display:inline-block;">
+                    <button id="calculate" onclick="calculate()">Use Data!</button>
+                </td>
+                <td style="width: 50px; display:inline-block">
+                    <input type="text" class="BlueBot" id="bbot1" placeholder="B Bot1">
+                </td>
+                <td style="width: 50px; display:inline-block">
+                    <input type="text" class="BlueBot" id="bbot2" placeholder="B Bot2">
+                </td>
+                <td style="width: 50px; display:inline-block">
+                    <input type="text" class="BlueBot" id="bbot3" placeholder="B Bot3">
+                </td>
+                <td style="width: 70px; display:inline-block; padding-left: 10px">
+                    <input type="text" id="event" placeholder="Event Key">
+                </td>
+                <td style="width: 60px; display:inline-block; padding-left: 10px">
+                    <select id="match_type">
+                        <option value="_q">Quals</option>
+                        <option value="_qf">QuartF</option>
+                        <option value="_sf">SemiF</option>
+                        <option value="_f">Finals</option>
+                    </select>
+                </td>
+                <td style="width: 25px; display:inline-block; padding-left: 10px">
+                    <input type="text" id="num1" placeholder="#">
+                </td>
+                <td style="width: 25px; display:inline-block; padding-left: 10px" id="match_num">
+                    <input type="text" id="num2" placeholder="#" hidden>
+                    <button id="search" onclick="search()" style="width: 60px">Search!</button>
+                </td>
+                <td id="shifted" style="width: 50px; display:inline-block; padding-left: 10px">
+                    <button onclick="search()" hidden style="width: 60px">Search!</button>
+                </td>
             </tr>
         </tbody>
     </table>
+    <textarea id="blueStats"></textarea>
+    <textarea id="redStats"></textarea>
     <div id="items" style="position: absolute; left: 0; top: 0; height: 10px; width: 100%;">
     </div>
     <script>
