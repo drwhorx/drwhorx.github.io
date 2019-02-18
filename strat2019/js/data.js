@@ -118,5 +118,12 @@ const data = {
     }
 }
 const filter = {
-    
+    "auto_points": "Auton",
+    "auto_points_var": "Auton δ",
+    "endgame_points": "Endgame",
+    "endgame_points_var": "Endgame δ",
+    "score": "Score",
+    "score_var": "Score δ",
+    "prob_face_boss": "Face the Boss Probability",
+    "prob_auto_quest": "Auto Quest Probability"
 }

@@ -5,6 +5,7 @@
 <head>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
     <script src="js/data.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/main.js"></script>
@@ -12,8 +13,10 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="Amon Green's WebStrat" />
     <meta property="og:description" content="Team 5530's Web Strategy for 2019" />
-    <meta property="og:image" content="https://www.firstinspires.org/sites/default/files/uploads/resource_library/brand/FIRSTicon_RGB_withTM.jpg" />
-    <link rel="icon" href="https://www.firstinspires.org/sites/default/files/uploads/resource_library/brand/FIRSTicon_RGB_withTM.jpg">
+    <meta property="og:image"
+        content="https://www.firstinspires.org/sites/default/files/uploads/resource_library/brand/FIRSTicon_RGB_withTM.jpg" />
+    <link rel="icon"
+        href="https://www.firstinspires.org/sites/default/files/uploads/resource_library/brand/FIRSTicon_RGB_withTM.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -39,7 +42,7 @@
                         <option>Add Data</option>
                     </select>
                 </td>
-                <td style="width: 61px; display:inline-block">
+                <td style="width: 66px; display:inline-block">
                     <div id="pallette">
                         <div id="black" style="background-color: black" onclick="color(this)"></div>
                         <div id="blue" style="background-color: blue" onclick="color(this)"></div>
@@ -48,7 +51,7 @@
                         <div id="white" style="background-color: white" onclick="color(this)"></div>
                     </div>
                 </td>
-                <td style="width: 55px; display:inline-block; padding-left: 5px">
+                <td style="width: 54px; display:inline-block;">
                     <select id="theme">
                         <option>Dark</option>
                         <option>Light</option>
@@ -60,7 +63,8 @@
                 </td>
                 <td style="width: 50px; display:inline-block">
                     <input type="text" class="RedBot" id="rbot2" placeholder="R Bot2">
-                    <button id="submit" style="width: 57px !important; left: 0px !important;" hidden onclick="submit()">Submit!</button>
+                    <button id="submit" style="width: 57px !important; left: 0px !important;" hidden
+                        onclick="submit()">Submit!</button>
                 </td>
                 <td style="width: 50px; display:inline-block">
                     <input type="text" class="RedBot" id="rbot3" placeholder="R Bot3">
@@ -104,6 +108,15 @@
     <textarea id="blueStats"></textarea>
     <textarea id="redStats"></textarea>
     <div id="items" style="position: absolute; left: 0; top: 0; height: 10px; width: 100%;">
+    </div>
+    <button id="export" onclick="print()">Print!</button>
+    <div id="print">
+        <canvas id="BlueSandstormCanvas" class="print_canvas"></canvas>
+        <canvas id="BlueTeleopCanvas" class="print_canvas"></canvas>
+        <canvas id="BlueEndgameCanvas" class="print_canvas"></canvas>
+        <canvas id="RedSandstormCanvas" class="print_canvas"></canvas>
+        <canvas id="RedTeleopCanvas" class="print_canvas"></canvas>
+        <canvas id="RedEndgameCanvas" class="print_canvas"></canvas>
     </div>
     <script>
         initDraw()

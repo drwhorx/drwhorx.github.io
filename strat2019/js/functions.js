@@ -1,5 +1,5 @@
 function getTBA(url) {
-    return JSON.parse($.ajax({
+    var response = $.ajax({
         url: "https://www.thebluealliance.com/api/v3/" + url,
         type: "GET",
         beforeSend: function (xhr) {
@@ -7,7 +7,8 @@ function getTBA(url) {
                 'wFLfqneHnQeMApDRSJnAvtS1egVMBQzXxn2E6vGW0DuGy3HhRYztR8tGJvbdBX0G');
         },
         async: false
-    }).responseText);
+    }).responseText
+    return response == undefined || JSON.parse(response).Errors != undefined ? undefined : JSON.parse(response);
 };
 
 function getEventRankings(eventkey) {
