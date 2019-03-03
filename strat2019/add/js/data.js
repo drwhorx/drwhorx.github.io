@@ -55,6 +55,9 @@ const table = {
     "HAB Climb": {
         "opts": ["Level 1 Park", "Level 2 Climb", "Level 3 Climb", "None"]
     },
+    "Break?": {
+        "opts": ["TRUE", "FALSE"]
+    },
     "Notes": {
         "type": "text"
     }
