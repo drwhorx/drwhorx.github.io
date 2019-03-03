@@ -1,0 +1,27 @@
+body {
+    background-color: #333333;
+}
+
+#items button {
+    display: inline-block;
+    width: 20px;
+    padding: 0px;
+    height: 24px;
+    text-align: center;
+}
+.stacked {
+    left: 20px;
+    position: relative;
+}
+div[stack="true"] {
+    width: 230px !important;
+}
+#items div {
+    margin-bottom: 5px;
+    border: 1px solid white;
+    width: 200px;
+    color: #ffffff;
+}
+#items input, #items select {
+    width: 125px;
+}

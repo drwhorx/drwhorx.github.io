@@ -1,3 +1,4 @@
+sessionStorage.setItem("data", JSON.stringify(data))
 window.onload = function () {
     var nodes = $("body").find("*")
     for (i = 0; i < nodes.length; i++) {
@@ -8,7 +9,6 @@ window.onload = function () {
         }
     }
     document.body.setAttribute("theme", "Dark")
-    sessionStorage.setItem("data", JSON.stringify(data))
     document.getElementById("blueStats").value = ""
     document.getElementById("redStats").value = ""
     document.getElementById("match_type").children[0].selected = true
