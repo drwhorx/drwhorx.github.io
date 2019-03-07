@@ -51,6 +51,7 @@ window.onload = function () {
 
                 var child = document.createElement("input")
                 child.type = "text"
+                child.value = 0;
                 child.setAttribute("id", keys[i])
                 child.setAttribute("data", true)
 
@@ -104,9 +105,20 @@ window.onload = function () {
 function submit() {
     var out = []
     var data = $("[data='true']")
+    var err = false;
     for (i = 0; i < data.length; i++) {
+        var plc = data[i].id
+        if (table[plc].optional == undefined) {
+            var bool1 = table[plc].type == "number" && (Number(data[i].value) == NaN || data[i].value == "")
+            var bool2 = table[plc].type == "text" && data[i].value == ""
+            if (bool1 || bool2) {
+                alert("Data entry for \"" + plc + "\" is invalid!")
+                err = true;
+            }
+        }
         out.push(data[i].value)
     }
+    if (err) return;
     var jqxhr = $.ajax({
         url: "https://script.google.com/macros/s/AKfycbz-R1qyevrkZwcHv-KuQIzcjsPOnch_YbI6N3on0y0D55raAvIV/exec",
         method: "GET",

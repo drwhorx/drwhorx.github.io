@@ -3,16 +3,19 @@ const table = {
         "type": "number"
     },
     "Team #": {
-        "type": "text"
+        "type": "number"
     },
     "Alliance": {
         "opts": ["Red", "Blue"]
     },
-    "Starting Position": {
+    "Sandstorm Bonus": {
         "opts": ["Level 1", "Level 2"]
     },
     "Sandstorm Routine": {
-        "opts": ["Autonomous", "Driver Controlled", "Both"]
+        "opts": ["Autonomous", "Driver Controlled", "Both", "Unsure"]
+    },
+    "Game Pieces Dropped": {
+        "type": "number"
     },
     "Sandstorm Objects": {
         "type": "stack"
@@ -56,9 +59,10 @@ const table = {
         "opts": ["Level 1 Park", "Level 2 Climb", "Level 3 Climb", "None"]
     },
     "Break?": {
-        "opts": ["TRUE", "FALSE"]
+        "opts": ["No", "Yes"]
     },
     "Notes": {
-        "type": "text"
+        "type": "text",
+        "optional": true
     }
 }
