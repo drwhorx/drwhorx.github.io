@@ -9,10 +9,7 @@ const table = {
         "opts": ["Red", "Blue"]
     },
     "Sandstorm Bonus": {
-        "opts": ["Level 1", "Level 2"]
-    },
-    "Sandstorm Routine": {
-        "opts": ["Autonomous", "Driver Controlled", "Both", "Unsure"]
+        "opts": ["Level 1", "Level 2", "None"]
     },
     "Game Pieces Dropped": {
         "type": "number"
@@ -20,38 +17,38 @@ const table = {
     "Sandstorm Objects": {
         "type": "stack"
     },
-    "Sandstorm Cargo-Ship Cargo": {
+    "Sandstorm Low Cargo": {
         "type": "number",
         "parent": "Sandstorm Objects"
     },
-    "Sandstorm Cargo-Ship Panels": {
+    "Sandstorm Low Panels": {
         "type": "number",
         "parent": "Sandstorm Objects"
     },
-    "Sandstorm Rocket Cargo": {
+    "Sandstorm High Cargo": {
         "type": "number",
         "parent": "Sandstorm Objects"
     },
-    "Sandstorm Rocket Panels": {
+    "Sandstorm High Panels": {
         "type": "number",
         "parent": "Sandstorm Objects"
     },
     "Teleop Objects": {
         "type": "stack"
     },
-    "Teleop Cargo-Ship Cargo": {
+    "Teleop Low Cargo": {
         "type": "number",
         "parent": "Teleop Objects"
     },
-    "Teleop Cargo-Ship Panels": {
+    "Teleop Low Panels": {
         "type": "number",
         "parent": "Teleop Objects"
     },
-    "Teleop Rocket Cargo": {
+    "Teleop High Cargo": {
         "type": "number",
         "parent": "Teleop Objects"
     },
-    "Teleop Rocket Panels": {
+    "Teleop High Panels": {
         "type": "number",
         "parent": "Teleop Objects"
     },
