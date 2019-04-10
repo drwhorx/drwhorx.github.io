@@ -1,0 +1,85 @@
+#check {
+    position: relative;
+    top: 15px;
+    width: 150px;
+    left: 25px;
+    background-color: #333333;
+    color: white;
+}
+
+#wrapper {
+    width: 600px;
+    padding: 10px;
+    left: 25px;
+    height: auto;
+    top: 25px;
+    border-style: solid;
+    border-color: white;
+    border-width: 2px;
+    position: relative;
+}
+
+.checked {
+    width: 580px;
+    padding: 5px;
+    margin-bottom: 5px;
+    height: auto;
+    border-style: solid;
+    border-color: white;
+    border-width: 2px;
+    position: relative;
+}
+
+.error {
+    width: 570px;
+    height: auto;
+    padding: 5px;
+    border-style: solid;
+    border-color: red;
+    border-width: 2px;
+    position: relative;
+}
+
+body {
+    height: auto;
+    background-color: #333333;
+}
+
+.pic {
+    display: inline-block;
+    max-height: 20px;
+    max-width: 20px;
+    width: auto;
+    height: auto;
+    top: 3px;
+    position: relative;
+}
+
+.message {
+    display: inline-block;
+}
+
+p {
+    height: auto;
+    margin: 2px;
+    color: #ffffff;
+    bottom: 3px;
+    position: relative;
+}
+
+.footer {
+    padding-top: 5px;
+}
+.title {
+    display: inline-block
+}
+.minimize {
+    display: inline-block;
+    position: relative;
+    top: -5px;
+    width: 20px;
+    height: 20px;
+    background-color: #333333;
+    color: white;
+    font-size: 10px;
+}
