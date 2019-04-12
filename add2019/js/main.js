@@ -126,9 +126,28 @@ function submit() {
         data: {
             data: out
         }
-    }).success(
-        alert("Data Submitted!")
-    );
+    }).success(function () {
+
+        var arr = JSON.parse(localStorage.getItem("arr"))
+        for (i = 0; i < arr.length; i++) {
+            $.ajax({
+                url: "https://script.google.com/macros/s/AKfycbz-R1qyevrkZwcHv-KuQIzcjsPOnch_YbI6N3on0y0D55raAvIV/exec",
+                method: "GET",
+                dataType: "json",
+                data: {
+                    data: arr[i]
+                }
+            })
+        }
+        alert("Data submitted!")
+        arr = []
+        localStorage.setItem("arr", JSON.stringify(arr))
+    }).fail(function () {
+        var arr = JSON.parse(localStorage.getItem("arr"))
+        arr.push(out);
+        alert("Data added, but held for later.")
+        localStorage.setItem("arr", JSON.stringify(arr))
+    })
 }
 
 function increment(name) {
