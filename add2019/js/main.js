@@ -1,7 +1,9 @@
 
 window.onload = function () {
     var keys = Object.keys(table)
-
+    if (localStorage.getItem("arr") == null) {
+        localStorage.setItem("arr", "[]")
+    }
     for (i = 0; i < keys.length; i++) {
         if (table[keys[i]].type == "stack") {
             var div = document.createElement("div")
