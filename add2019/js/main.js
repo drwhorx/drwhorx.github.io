@@ -122,18 +122,17 @@ function submit() {
     }
     if (err) return;
     var jqxhr = $.ajax({
-        url: "https://script.google.com/macros/s/AKfycbz-R1qyevrkZwcHv-KuQIzcjsPOnch_YbI6N3on0y0D55raAvIV/exec",
+        url: "https://script.google.com/macros/s/AKfycbyQtpP-SmVRcFeY5MIWZV0qliH7O5m7VqHjAZgmxRHUB9SIkCiJ/exec",
         method: "GET",
         dataType: "json",
         data: {
             data: out
         }
     }).success(function () {
-
         var arr = JSON.parse(localStorage.getItem("arr"))
         for (i = 0; i < arr.length; i++) {
             $.ajax({
-                url: "https://script.google.com/macros/s/AKfycbz-R1qyevrkZwcHv-KuQIzcjsPOnch_YbI6N3on0y0D55raAvIV/exec",
+                url: "https://script.google.com/macros/s/AKfycbyQtpP-SmVRcFeY5MIWZV0qliH7O5m7VqHjAZgmxRHUB9SIkCiJ/exec",
                 method: "GET",
                 dataType: "json",
                 data: {

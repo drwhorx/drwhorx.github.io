@@ -1,8 +1,8 @@
 const table = {
-    "Match #": {
+    "Team #": {
         "type": "number"
     },
-    "Team #": {
+    "Match #": {
         "type": "number"
     },
     "Alliance": {
