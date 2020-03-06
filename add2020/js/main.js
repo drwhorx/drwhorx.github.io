@@ -103,7 +103,7 @@ function submit() {
         method: "GET",
         dataType: "json",
         data: {
-            data: Object.keys(out)
+            data: Object.values(out)
         }
     })
     alert("Submitted!")
