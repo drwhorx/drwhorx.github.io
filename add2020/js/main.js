@@ -106,6 +106,7 @@ function submit() {
             data: Object.keys(out)
         }
     })
+    alert("Submitted!")
 }
 
 function increment(name) {
