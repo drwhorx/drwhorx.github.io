@@ -1,153 +1,110 @@
-
-window.onload = function () {
-    var keys = Object.keys(table)
-    if (localStorage.getItem("arr") == null) {
-        localStorage.setItem("arr", "[]")
-    }
-    for (i = 0; i < keys.length; i++) {
-        if (table[keys[i]].type == "stack") {
-            var div = document.createElement("div")
-            var p = document.createElement("p")
-            p.innerText = keys[i]
-            p.style = "margin-bottom:3px;margin-top:1px"
-            div.appendChild(p)
-            div.setAttribute("id", keys[i])
-            div.setAttribute("stack", true)
-            div.hidden = true;
-            document.getElementById("items").appendChild(div)
-        } else {
-            var div = document.createElement("div")
-            div.setAttribute("id", keys[i] + "Div")
-            document.getElementById("items").appendChild(div)
-        }
-    }
-
-    for (i = 0; i < keys.length; i++) {
-        switch (table[keys[i]].type) {
-            case "text":
-                var div = document.getElementById(keys[i] + "Div")
-                var p = document.createElement("p")
-                p.innerText = keys[i]
-                p.style = "margin-bottom:0px;margin-top:0px"
-                div.appendChild(p)
-
-                var child = document.createElement("input")
-                child.type = "text"
-                child.setAttribute("id", keys[i])
-                child.setAttribute("data", true)
-
-                div.appendChild(child)
-
-                if (table[keys[i]].parent != undefined) {
-                    div.setAttribute("class", "stacked")
-                    document.getElementById(table[keys[i]].parent).hidden = false;
-                    $("#" + keys[i] + "Div").appendTo($("#" + table[keys[i]].parent))
-                }
-                break;
-            case "number":
-                var div = document.getElementById(keys[i] + "Div")
-                var p = document.createElement("p")
-                p.innerText = keys[i]
-                p.style = "margin-bottom:0px;margin-top:0px"
-                div.appendChild(p)
-
-                var child = document.createElement("input")
-                child.type = "text"
-                child.value = 0;
-                child.setAttribute("id", keys[i])
-                child.setAttribute("data", true)
-
-                var inc = document.createElement("button")
-                inc.innerText = "+"
-                inc.setAttribute("onclick", "increment(\'" + keys[i] + "\')")
-
-                var dec = document.createElement("button")
-                dec.innerText = "-"
-                dec.setAttribute("onclick", "decrement(\'" + keys[i] + "\')")
-
-                div.appendChild(child)
-                div.appendChild(inc)
-                div.appendChild(dec)
-
-                if (table[keys[i]].parent != undefined) {
-                    div.setAttribute("class", "stacked")
-                    document.getElementById(table[keys[i]].parent).hidden = false;
-                    $("[id='" + keys[i] + "Div']").appendTo($("[id='" + table[keys[i]].parent + "']"))
-                }
-                break;
-            case undefined:
-                var div = document.getElementById(keys[i] + "Div")
-                var p = document.createElement("p")
-                p.innerText = keys[i]
-                p.style = "margin-bottom:0px;margin-top:0px"
-                div.appendChild(p)
-
-                var opts = table[keys[i]].opts
-                var child = document.createElement("select")
-                child.setAttribute("id", keys[i])
-                child.setAttribute("data", true)
-
-                for (a = 0; a < opts.length; a++) {
-                    var opt = document.createElement("option")
-                    opt.innerText = opts[a]
-                    child.appendChild(opt)
-                }
-
-                div.appendChild(child)
-                if (table[keys[i]].parent != undefined) {
-                    div.setAttribute("class", "stacked")
-                    document.getElementById(table[keys[i]].parent).hidden = false;
-                    $("#" + keys[i] + "Div").appendTo($("#" + table[keys[i]].parent))
-                }
-                break;
-        }
-    }
+function level(obj) {
+    if (!obj.children || obj.children.length == 0) return 0;
+    return 1 + Math.max(...obj.children.map(level))
 }
 
-function submit() {
-    var out = []
-    var data = $("[data='true']")
-    var err = false;
-    for (i = 0; i < data.length; i++) {
-        var plc = data[i].id
-        if (table[plc].optional == undefined) {
-            var bool1 = table[plc].type == "number" && (Number(data[i].value) == NaN || data[i].value == "")
-            var bool2 = table[plc].type == "text" && data[i].value == ""
-            if (bool1 || bool2) {
-                alert("Data entry for \"" + plc + "\" is invalid!")
-                err = true;
-            }
+const inc = (element) => {
+    let el = document.createElement("button");
+    let event = (function(item) {
+        return {
+            call: () => item.value++
         }
-        out.push(data[i].value)
+    })(element);
+    el.onclick = event.call;
+    el.innerText = "+";
+    return el;
+};
+const dec = (element) => {
+    let el = document.createElement("button");
+    let event = (function(item) {
+        return {
+            call: () => item.value--
+        }
+    })(element);
+    el.onclick = event.call;
+    el.innerText = "-";
+    return el;
+};
+
+function createDiv(obj) {
+    let div = document.createElement("div");
+    let p = document.createElement("p");
+    p.innerText = obj.title;
+    div.appendChild(p);
+    if (obj.type == "stack") {
+        div.setAttribute("stack", true);
+    } else if (obj.type == "number" || obj.type == "text") {
+        let child = document.createElement("input");
+        child.type = "text";
+        child.setAttribute("id", obj.id);
+        child.setAttribute("data", true);
+        div.appendChild(child);
+        if (obj.type == "number") {
+            child.value = 0;
+            div.appendChild(inc(child));
+            div.appendChild(dec(child));
+        }
+    } else if (obj.type == "opts") {
+        let opts = obj.opts;
+        let child = document.createElement("select");
+        child.setAttribute("id", obj.id);
+        child.setAttribute("data", true);
+        for (let a = 0; a < opts.length; a++) {
+            let opt = document.createElement("option");
+            opt.innerText = opts[a];
+            child.appendChild(opt);
+        }
+        div.appendChild(child);
     }
-    if (err) return;
+    div.style.width = (200 + (level(obj) * 30)) + "px";
+    return div;
+}
+
+const converted = [];
+
+window.onload = function() {
+    document.getElementById("items").hidden = true;
+
+    function recur(obj) {
+        if (!obj.children || obj.children.length == 0) {
+            converted.push(obj);
+            return createDiv(obj);
+        }
+        let div = createDiv(obj);
+        let children = obj.children.map(recur);
+        children.forEach(item => $(item).addClass("stacked"));
+        div.append(...children);
+        return div;
+    }
+
+    for (let obj of table) {
+        document.getElementById("items").appendChild(recur(obj));
+    }
+    document.getElementById("items").hidden = false;
+};
+
+function submit() {
+    let out = {};
+    let data = $("[data='true']");
+    for (let item of Array.from(data)) {
+        let obj = converted.find(obj => obj.id == item.id);
+        if (obj.optional === undefined && obj.type === "text" && item.value === "") {
+            alert("Data entry for \"" + item.id + "\" is invalid!");
+            return;
+        }
+        if (obj.type == "number" && (isNaN(Number(item.value)) || item.value === "")) {
+            alert("Data entry for \"" + item.id + "\" is invalid!");
+            return;
+        }
+        out[obj.id] = item.value;
+    }
     var jqxhr = $.ajax({
         url: "https://script.google.com/macros/s/AKfycbyQtpP-SmVRcFeY5MIWZV0qliH7O5m7VqHjAZgmxRHUB9SIkCiJ/exec",
         method: "GET",
         dataType: "json",
         data: {
-            data: out
+            data: Object.keys(out)
         }
-    }).success(function () {
-        var arr = JSON.parse(localStorage.getItem("arr"))
-        for (i = 0; i < arr.length; i++) {
-            $.ajax({
-                url: "https://script.google.com/macros/s/AKfycbyQtpP-SmVRcFeY5MIWZV0qliH7O5m7VqHjAZgmxRHUB9SIkCiJ/exec",
-                method: "GET",
-                dataType: "json",
-                data: {
-                    data: arr[i]
-                }
-            })
-        }
-        alert("Data submitted!")
-        arr = []
-        localStorage.setItem("arr", JSON.stringify(arr))
-    }).fail(function () {
-        var arr = JSON.parse(localStorage.getItem("arr"))
-        arr.push(out);
-        alert("Data added, but held for later.")
-        localStorage.setItem("arr", JSON.stringify(arr))
     })
 }
 
