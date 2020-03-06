@@ -99,7 +99,7 @@ function submit() {
         out[obj.id] = item.value;
     }
     var jqxhr = $.ajax({
-        url: "https://script.google.com/macros/s/AKfycbyQtpP-SmVRcFeY5MIWZV0qliH7O5m7VqHjAZgmxRHUB9SIkCiJ/exec",
+        url: "https://script.google.com/macros/s/AKfycbz-R1qyevrkZwcHv-KuQIzcjsPOnch_YbI6N3on0y0D55raAvIV/exec",
         method: "GET",
         dataType: "json",
         data: {
