@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<title>Better Zoom URLs</title>
+
+<head>
+    <meta property="og:title" content="Better Zoom URLs" />
+    <meta property="og:description" content="A tool for making better Zoom links that open right in the app, remove deadnames, and don't prompt a password" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #333333;
+            color: white;
+        }
+        
+        button {
+            border-radius: 0px;
+            background-color: ButtonFace;
+            border: 2px outset ThreeDLightShadow !important;
+        }
+        
+        input {
+            border-radius: 0px;
+            border: 2px outset ThreeDLightShadow !important;
+        }
+        
+        .b {
+            color: #55CDFC
+        }
+        
+        .w {
+            color: #ffffff;
+        }
+        
+        .p {
+            color: #F7A8B8;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            $("#autofill")[0].onclick = () => {
+                try {
+                    let url = new URL($("#prefill")[0].value);
+                    if (!url || (url.protocol !== "zoommtg:" && !url.hostname.includes("zoom"))) return;
+                    let params = url.searchParams;
+                    let meeting = params.get("confno") || (url.protocol != "zoommtg:" && url.pathname.slice(3));
+                    let password = params.get("pwd");
+                    let uname = params.get("uname");
+                    $("#meeting")[0].value = meeting;
+                    $("#password")[0].value = password;
+                    $("#uname")[0].value = uname;
+                } catch (err) {
+                    console.log(err)
+                    alert("huh, somethin happened, either you fucked up or i did, send me a github issues thingy if ur pretty sure its me, it wouldnt surprise me i was on like four cans of red bull when i made this");
+                }
+            }
+            $("#submit")[0].onclick = () => {
+                try {
+                    let url = new URL("zoommtg://zoom.us/join");
+                    let params = url.searchParams;
+                    let meeting = $("#meeting")[0].value;
+                    let password = $("#password")[0].value;
+                    let uname = $("#uname")[0].value;
+                    if (meeting) params.set("confno", meeting);
+                    if (password) params.set("pwd", password);
+                    if (uname) params.set("uname", uname);
+                    $("#output")[0].innerText = url.href;
+                    $("#output")[0].hidden = false;
+                    $("#bitch")[0].hidden = false;
+                } catch (err) {
+                    console.log(err)
+                    alert("huh, somethin happened, either you fucked up or i did, send me a github issues thingy if ur pretty sure its me, it wouldnt surprise me i was on like four cans of red bull when i made this");
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>
+        fuck inconsistent url schemes, all the homies hate inconsistent url schemes
+    </h1>
+    <p>
+        this is the same shit discord pulls and im tired of it
+    </p>
+    <table>
+        <tbody>
+            <tr>
+                <td>prefill from url</td>
+                <td><input type="text" id="prefill"></td>
+                <td>if you're lazy like me <button id="autofill">autofill</button></td>
+            </tr>
+            <tr>
+                <td>meeting id</td>
+                <td><input type="text" id="meeting"></td>
+                <td>self explanatory</td>
+            </tr>
+            <tr>
+                <td>password</td>
+                <td><input type="text" id="password"></td>
+                <td>don't worry this isn't sent anywhere, relax, i'm not twomad</td>
+            </tr>
+            <tr>
+                <td>preferred name</td>
+                <td><input type="text" id="uname"></td>
+                <td>for all my
+                    <span class="b">t</span><span class="p">r</span><span class="w">a</span><span class="p">n</span><span class="b">s</span> homies out there (optional)</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        now smash that like button to release yourself from the agony that is inconsistent zoom url schemes
+    </p>
+    <button id="submit">do it</button>
+    <p id="output" hidden></p>
+    <p id="bitch" hidden>you're welcome</p>
+</body>
+
+</html>
