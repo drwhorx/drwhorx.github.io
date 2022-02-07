@@ -1,0 +1,110 @@
+:root {
+    --green: #538d4e;
+    --red: #ff6868;
+    --yellow: #b59f3b;
+    --absent: #3a3a3c;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #121213;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+}
+
+#wrap {
+    width: 100vw;
+    height: 100vh;
+    max-width: 50vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#overflow1 {
+    overflow-y: scroll;
+    max-height: 70vw;
+}
+
+#overflow2 {
+    position: relative;
+    left: 5vw;
+    width: 90vw;
+}
+
+#title {
+    height: 12vw;
+    font-size: 7vw;
+    line-height: 12vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#calculate {
+    margin-top: 4vw;
+    margin-bottom: 4vw;
+    width: 66vw;
+    height: 10vw;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 6vw;
+    line-height: 10vw;
+    user-select: none;
+    background-color: var(--green);
+}
+
+#shill {
+    height: 6vw;
+}
+
+#shill a {
+    font-size: 6vw;
+    line-height: 6vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 50vh) {
+    #title {
+        height: 6vh;
+        font-size: 3.5vh;
+        line-height: 6vh;
+    }
+    #calculate {
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        width: 33vh;
+        height: 5vh;
+        font-size: 3vh;
+        line-height: 5vh;
+    }
+    #overflow1 {
+        max-height: 35vh;
+    }
+    #overflow2 {
+        left: 2.5vh;
+        width: 45vh;
+    }
+    #shill {
+        position: absolute;
+        bottom: 2vh;
+        height: 3vh;
+        width: 50vh;
+    }
+    #shill i {
+        font-size: 2vh;
+        line-height: 2vh;
+        margin-right: 1vh;
+    }
+    #shill a {
+        font-size: 3vh;
+        line-height: 3vh;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Gilbert';
+    src: url('Gilbert.woff2') format('woff2'),
+        url('Gilbert.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+

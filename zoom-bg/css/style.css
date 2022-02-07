@@ -1,0 +1,28 @@
+div {
+    border: 0px solid black;
+    font-family: 'Gilbert';
+}
+
+#content {
+    position: absolute;
+    width: 500px;
+    height: 281.25px;
+    left: calc(50vw - 250px);
+    top: 100px;
+}
+
+#bar1 {
+    position: absolute;
+    width: 200px;
+    height: 281.25px;
+    right: calc(50vw + 275px);
+    top: 100px;
+}
+
+#bar2 {
+    position: absolute;
+    width: 200px;
+    height: 281.25px;
+    left: calc(50vw + 275px);
+    top: 100px;
+}

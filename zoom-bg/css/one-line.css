@@ -1,0 +1,25 @@
+#one-line {
+    position: absolute;
+    width: auto;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+}
+
+#one-line.top {
+    top: 10px;
+}
+
+#one-line.bottom {
+    bottom: 10px;
+}
+
+#one-line.left {
+    left: 10px;
+    text-align: left;
+}
+
+#one-line.right {
+    right: 10px;
+    text-align: right;
+}

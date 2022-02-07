@@ -1,0 +1,108 @@
+.p1 {
+    font-size: 9vh;
+    height: 9vh;
+    line-height: 9vh;
+    fill: var(--orange4);
+    dominant-baseline: hanging;
+    text-anchor: end;
+}
+
+.p2 {
+    font-size: 10;
+    height: 10;
+    line-height: 10;
+    fill: black;
+    text-anchor: end;
+}
+
+.p3 {
+    font-size: 15;
+    height: 15;
+    line-height: 15;
+    fill: black;
+}
+
+.p4 {
+    font-size: 20;
+    height: 20;
+    line-height: 20;
+    fill: black;
+    text-anchor: end;
+}
+
+.c1 {
+    font-size: 8vh;
+    line-height: 8vh;
+    color: var(--orange1);
+}
+
+.c2 {
+    font-size: 5vh;
+    line-height: 5vh;
+    color: var(--orange1);
+}
+
+.c3 {
+    font-size: 6.5vh;
+    line-height: 6.5vh;
+    color: var(--orange2);
+}
+
+.c4 {
+    font-size: 4vh;
+    line-height: 4vh;
+    color: var(--orange2);
+}
+
+.b1 p {
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: outside;
+    text-indent: -1vh;
+}
+
+.b1 {
+    position: relative;
+    left: 6vh;
+}
+
+.b1 p:first-child {
+    margin-top: 1vh;
+}
+
+.b1 p:last-child {
+    margin-bottom: 1vh;
+}
+
+.s1 {
+    animation: s1 .15s 2 linear;
+}
+
+@keyframes s1 {
+    50% { color: white }
+}
+
+.button {
+    cursor: pointer;
+    pointer-events: all;
+}
+
+#b_resume:hover {
+    fill: var(--red1_l)
+}
+
+#b_about:hover {
+    fill: var(--orange4_l)
+}
+
+#b_linkedin:hover, #b_projects:hover {
+    fill: var(--orange3_l)
+}
+
+#b_github:hover, #b_experience:hover {
+    fill: var(--orange2_l)
+}
+
+#b_email:hover, #b_education:hover {
+    fill: var(--orange1_l)
+}

@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/fonts/starfleet.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/segments.css">
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <div class="wrapper">
+            <div id="header">
+                <svg style="width: 20vh; height: 100%" viewBox="0 0 100 100">
+                    <rect x="5" y="5" width="95" height="40" style="fill: var(--orange3)"/>
+                    <path d="M 5 50 L 5 65 q 0 30 30 30 L 100 95 L 100 50 Z" fill="var(--orange4)"/>
+                    <path d="M 100 90 L 120 90 L 120 75 q -20 0 -20 -20 L 99 50 Z" fill="var(--orange4)"/>
+                    <text x="97.5" y="43" class="p2">NCC-1701</text>
+                    <rect x="90" y="75%" width="210" height="20" fill="var(--orange4)"/>
+                    <text x="297.5" y="92.5" class="p2">3831A</text>
+                    <rect x="305" y="75%" width="175" height="20" fill="var(--orange2)"/>
+                    <text x="476.5" y="92.5" class="p2">88-105B</text>
+                </svg><svg style="width: calc(100% - 98vh); height: 100%; left: 97vh">
+                    <rect x="0" y="75%" width="100%" height="20%" fill="var(--purple2)"/>
+                </svg><svg style="right: 1vh; top: 1vh">
+                    <text x="100%" class="p1">AMON GREEN</text>
+                </svg>
+                <svg style="width: 20vh; height: 100%; right: 0" viewbox="0 0 100 100">
+                    <a href="http://amongreen.com/linkedin" target="_blank">
+                        <rect id="b_resume" class="button" x="-300" y="45%" width="95" height="25%" fill="var(--red1)" ry="12.5"/>
+                    </a>
+                    <text x="-290" y="67.5" class="p3">RESUME</text>
+                    <a href="http://amongreen.com/linkedin" target="_blank">
+                        <rect id="b_linkedin" class="button" x="-200" y="45%" width="95" height="25%" fill="var(--orange3)" ry="12.5"/>
+                    </a>
+                    <text x="-190" y="67.5" class="p3">LINKEDIN</text>
+                    <a href="http://amongreen.com/linkedin" target="_blank">
+                        <rect id="b_github" class="button" x="-100" y="45%" width="95" height="25%" fill="var(--orange2)" ry="12.5"/>
+                    </a>
+                    <text x="-90" y="67.5" class="p3">GITHUB</text>
+                    <a href="http://amongreen.com/linkedin" target="_blank">
+                        <rect id="b_email" class="button" x="0" y="45%" width="95" height="25%" fill="var(--orange1)" ry="12.5"/>
+                    </a>
+                    <text x="10" y="67.5" class="p3">EMAIL</text>
+                    <text x="92.5" y="92.5" class="p2">74656</text>
+                </svg>
+            </div>
+            <div id="sidebar">
+                <svg style="width: 20vh; height: 100%" viewBox="0 0 100 400">
+                    <path d="M 35 0 q -30 0 -30 30 L 5 45 L 100 45 L 100 0 Z" fill="var(--orange2)"/>
+                    <path d="M 100 35 q 0 -25 25 -25 L 125 0 L 99 0 Z" fill="var(--orange2)"/>
+                    <text x="97.5" y="43" class="p2">78-2222</text>
+                    <rect x="130" y="0" width="170" height="10" fill="var(--orange3)"/>
+                    <rect x="305" y="0" width="175" height="10" fill="var(--orange4)"/>
+                    <rect x="5" y="190" width="95" height="100" fill="var(--purple1)"/>
+                    <rect x="5" y="295" width="95" height="100" fill="var(--orange3)"/>
+                    <text x="97.5" y="287.5" class="p2">24-55B</text>
+                    <text x="97.5" y="392.5" class="p2">87-11C</text>
+                </svg><svg style="width: calc(100% - 98vh); height: 2vh; left: 97vh">
+                    <rect width="100%" height="100%" fill="var(--purple1)"/>
+                </svg><svg style="width: 20vh; height: 100%" viewBox="0 0 100 400">
+                    <rect id="b_about" class="button" x="5" y="50" width="95" height="30" fill="var(--orange4)" onclick="r_about()"/>
+                    <rect id="b_projects" class="button" x="5" y="85" width="95" height="30" fill="var(--orange3)" onclick="r_projects()"/>
+                    <rect id="b_experience" class="button" x="5" y="120" width="95" height="30" fill="var(--orange2)" onclick="r_experience()"/>
+                    <rect id="b_education" class="button" x="5" y="155" width="95" height="30" fill="var(--orange1)" onclick="r_education()"/>
+                    <text x="97.5" y="78" class="p4">ABOUT ME</text>
+                    <text x="97.5" y="113" class="p4">PROJECTS</text>
+                    <text x="97.5" y="148" class="p4">EXPERIENCE</text>
+                    <text x="97.5" y="183" class="p4">EDUCATION</text>
+                </svg>
+            </div>
+            <div id="content">
+                <div id="about" class="page" hidden>
+                    <p class="c1">ABOUT ME</p>
+                    <p class="c2">I AM STUDYING MECHANICAL ENGINEERING AT THE UNIVERSITY OF MICHIGAN. MY INTERESTS INCLUDE:</p>
+                    <div class="b1">
+                        <p class="c2"><span style="color: var(--orange2)">COMPUTER SCIENCE - </span>THROUGH PERSONAL, PROFESSIONAL, AND ACADEMIC ENDEAVORS</p>
+                        <p class="c2"><span style="color: var(--orange2)">MANUFACTURING - </span>THROUGH AEROSPACE INDUSTRY EXPERIENCE</p>
+                        <p class="c2"><span style="color: var(--orange2)">LGBTQ+ ACTIVISM - </span>THROUGH MULTIPLE OUTREACH ORGANIZATIONS</p>
+                        <p class="c2"><span style="color: var(--orange2)">FIRST ROBOTICS - </span>THROUGH PARTICIPATION AND VOLUNTEER WORK</p>
+                        <p class="c2"><span style="color: var(--orange2)">GRAPHIC DESIGN - </span>THROUGH SOCIAL MEDIA OUTREACH AND PERSONAL ENDEAVORS</p>
+                    </div>
+                    <p class="c2">I INTEND TO PURSUE THESE INTERESTS DURING MY STUDIES. HERE, YOU CAN LEARN ABOUT MORE OF MY EXPERIENCES.</p>
+                </div>
+                <div id="projects" class="page" hidden>
+                    <p class="c1">MY PROJECTS</p>
+
+                </div>
+                <div id="experience" class="page" hidden>
+                    <p class="c1">MY EXPERIENCE</p>
+                    <div style="height: 1vh;"></div>
+                    <p class="c3">DELTA GEAR - PROCESS ENGINEER</p>
+                    <p class="c4">AUGUST 2019 - PRESENT</p>
+                    <div style="height: 1vh"></div>
+                    <p class="c2">I DESIGN MANUFACTURING PROCESSES FOR GEARS IN COMMERCIAL AND MILITARY AEROSPACE APPLICATIONS. IN MY TIME AT DELTA GEAR, I'VE HAD THE FOLLOWING EXPERIENCES:</p>
+                    <div class="b1">
+                        <p class="c2"><span style="color: var(--orange2)">HEAVY MACHINERY - </span>MANUFACTURING GEARS AND COMMUNICATING WITH OPERATORS</p>
+                        <p class="c2"><span style="color: var(--orange2)">DEPARTMENT OF DEFENSE - </span>CARRYING OUT DPAS AND ITAR CONTRACTS</p>
+                        <p class="c2"><span style="color: var(--orange2)">SOLIDWORKS - </span>DESIGNING MANUFACTURING MODELS, DRAFTING DOCUMENTS, AND GAGE MODELS</p>
+                        <p class="c2"><span style="color: var(--orange2)">ANSI B92.1 / AGMA 2000 - </span>DEVELOPING GEAR GEOMETRY MODELING STRATEGIES</p>
+                        <p class="c2"><span style="color: var(--orange2)">EXCEL / ACCESS VBA - </span>DEVELOPING DATABASES AND GEAR CALCULATION TOOLS</p>
+                    </div>
+                    <div style="height: 1vh;"></div>
+                    <p class="c3">LGBTQ+ OF FIRST - STUDENT ADMINISTRATOR</p>
+                    <p class="c4">JUNE 2018 - JUNE 2020</p>
+                    <div style="height: 1vh"></div>
+                    <p class="c2">I SERVED ON THE ADMINISTRATIVE BOARD FOR THE LGBTQ+ OF FIRST, AN LGBTQ+ NETWORK WITHIN FIRST ROBOTICS. I CONTINUE TO REPRESENT THE ORGANIZATION AND CONTRIBUTE TO THEIR OUTREACH EFFORTS. I'VE HAD THE FOLLOWING EXPERIENCES WITH LGBTQ+ OF FIRST:</p>
+                    <div class="b1">
+                        <p class="c2"><span style="color: var(--orange2)">OUTREACH - </span>FRONTING OUTREACH ENDEAVORS AT FIRST ROBOTICS EVENTS AND OTHER SETTINGS</p>
+                        <p class="c2"><span style="color: var(--orange2)">SOCIAL MEDIA - </span>ORGANIZING SOCIAL MEDIA CAMPAIGNS AND CREATING CONTENT</p>
+                        <p class="c2"><span style="color: var(--orange2)">GRAPHIC DESIGN - </span>DESIGNING SOCIAL MEDIA CONTENT AND PROMOTIONAL MATERIALS</p>
+                        <p class="c2"><span style="color: var(--orange2)">LEADERSHIP - </span>AUTHORING ORGANIZATION BYLAWS AND TAKING ON PROJECTS</p>
+                    </div>
+                </div>
+                <div id="education" class="page" hidden>
+                    <p class="c1">MY EDUCATION</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+#logo {
+    position: absolute;
+    /* logo aspect ratio */
+    width: calc((4515 / 2008) * 50px);
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: auto 50px;
+    background-position: center center;
+}
+
+#logo.white {
+    background-image: url("pngs/logo_white.png");
+}
+
+#logo.black {
+    background-image: url("pngs/logo_white.png");
+}
+
+#logo.top {
+    top: 10px;
+}
+
+#logo.bottom {
+    bottom: 10px;
+}
+
+#logo.left {
+    left: 10px;
+}
+
+#logo.right {
+    right: 10px;
+}

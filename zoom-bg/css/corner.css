@@ -1,0 +1,156 @@
+.corner {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    background-repeat: no-repeat;
+    background-size: 75px 75px;
+    background-position: center center;
+}
+
+.corner.top {
+    top: 0px;
+}
+
+.corner.bottom {
+    bottom: 0px;
+}
+
+.corner.left {
+    left: 0px;
+}
+
+.corner.right {
+    right: 0px;
+}
+
+.corner.top.right {
+    transform: rotate(-90deg)
+}
+
+.corner.top.left {
+    transform: rotate(180deg)
+}
+
+.corner.bottom.left {
+    transform: rotate(90deg)
+}
+
+.corner.ace {
+    background-image: url("pngs/corner_ace.png");
+}
+
+.corner.agender {
+    background-image: url("pngs/corner_agender.png");
+}
+
+.corner.aro {
+    background-image: url("pngs/corner_aro.png");
+}
+
+.corner.bi {
+    background-image: url("pngs/corner_bi.png");
+}
+
+.corner.bigender_6 {
+    background-image: url("pngs/corner_bigender_6.png");
+}
+
+.corner.bigender_7 {
+    background-image: url("pngs/corner_bigender_7.png");
+}
+
+.corner.bigender_fem {
+    background-image: url("pngs/corner_bigender_fem.png");
+}
+
+.corner.bigender_masc {
+    background-image: url("pngs/corner_bigender_masc.png");
+}
+
+.corner.demiboy {
+    background-image: url("pngs/corner_demiboy.png");
+}
+
+.corner.demigender {
+    background-image: url("pngs/corner_demigender.png");
+}
+
+.corner.demigirl {
+    background-image: url("pngs/corner_demigirl.png");
+}
+
+.corner.demiromantic {
+    background-image: url("pngs/corner_demiromantic.png");
+}
+
+.corner.demisexual {
+    background-image: url("pngs/corner_demisexual.png");
+}
+
+.corner.genderfae {
+    background-image: url("pngs/corner_genderfae.png");
+}
+
+.corner.genderfluid {
+    background-image: url("pngs/corner_genderfluid.png");
+}
+
+.corner.genderflux_5 {
+    background-image: url("pngs/corner_genderflux_6.png");
+}
+
+.corner.genderflux_6 {
+    background-image: url("pngs/corner_genderflux_6.png");
+}
+
+.corner.genderqueer {
+    background-image: url("pngs/corner_genderqueer.png");
+}
+
+.corner.gnc {
+    background-image: url("pngs/corner_gnc.png");
+}
+
+.corner.greyace {
+    background-image: url("pngs/corner_greyace.png");
+}
+
+.corner.greyro {
+    background-image: url("pngs/corner_greyro.png");
+}
+
+.corner.intersex {
+    background-image: url("pngs/corner_intersex.png");
+}
+
+.corner.lesbian {
+    background-image: url("pngs/corner_lesbian.png");
+}
+
+.corner.lgbt {
+    background-image: url("pngs/corner_lgbt.png");
+}
+
+.corner.mlm {
+    background-image: url("pngs/corner_mlm.png");
+}
+
+.corner.nonbinary {
+    background-image: url("pngs/corner_nonbinary.png");
+}
+
+.corner.pansexual {
+    background-image: url("pngs/corner_pansexual.png");
+}
+
+.corner.polysexual {
+    background-image: url("pngs/corner_polysexual.png");
+}
+
+.corner.progress {
+    background-image: url("pngs/corner_progress.png");
+}
+
+.corner.trans {
+    background-image: url("pngs/corner_trans.png");
+}

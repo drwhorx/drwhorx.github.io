@@ -1,0 +1,45 @@
+#two-lines {
+    position: absolute;
+    width: auto;
+    height: 50px;
+}
+
+#two-lines.top {
+    top: 10px;
+}
+
+#two-lines.bottom {
+    bottom: 10px;
+}
+
+#two-lines.left {
+    left: 10px;
+}
+
+#two-lines.right {
+    right: 10px;
+}
+
+#line-1 {
+    height: 30px;
+    line-height: 30px;
+    font-size: 25px;
+    border: 0;
+    width: auto;
+}
+
+#line-2 {
+    height: 20px;
+    line-height: 20px;
+    font-size: 20px;
+    border: 0;
+    width: auto;
+}
+
+#two-lines.left div  {
+    text-align: left;
+}
+
+#two-lines.right div {
+    text-align: right;
+}

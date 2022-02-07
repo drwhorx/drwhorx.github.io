@@ -1,0 +1,105 @@
+body,
+html {
+    margin: 0;
+    width: 100%;
+}
+
+:root {
+    --orange1: #f7981d;
+    --orange1_l: #f9b175;
+    --orange2: #f5bc44;
+    --orange2_l: #f7cb81;
+    --orange3: #ffcb67;
+    --orange3_l: #ffd693;
+    --orange4: #f9f29b;
+    --orange4_l: #fbf6bf;
+    --red1: #cb6463;
+    --red1_l: #d69190;
+    --grey1: #929292;
+    --purple1: #986799;
+    --purple2: #ca99c5;
+    --black1: #111111;
+    --grey1: #929292;
+}
+
+body {
+    background-color: var(--black1);
+}
+
+text,
+p {
+    font-family: 'starfleet';
+}
+
+p {
+    margin: 0;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#main {
+    max-width: calc(2 * 100vh);
+    background-color: var(--black1);
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+#header {
+    width: 100%;
+    height: 20vh;
+    position: absolute;
+}
+
+svg,
+p {
+    position: absolute;
+    overflow: visible;
+    pointer-events: none;
+}
+
+#sidebar {
+    position: absolute;
+    width: 100%;
+    height: 80vh;
+    top: 20vh;
+}
+
+#sidebar svg {
+    z-index: 100;
+}
+
+#content {
+    position: absolute;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: calc(100% - 20vh);
+    height: 80vh;
+    top: 20vh;
+    right: 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#content::-webkit-scrollbar {
+    display: none;
+}
+
+#content p {
+    z-index: 0;
+    height: auto;
+    position: relative;
+}
+
+#about, #projects, #experience, #education {
+    margin: 8vh 6vh 0 6vh;
+}
+
+@media screen and (max-aspect-ratio: 1.07/1) {
+
+}
