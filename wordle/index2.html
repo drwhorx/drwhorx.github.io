@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 700;
+                background-color: #121213;
+            }
+            input {
+                width: 50px;
+                height: 50px;
+                font-size: 40px;
+                line-height: 50px;
+                background-color: transparent;
+                border: 1px solid #3a3a3c;
+                text-align: center;
+                color: white;
+                padding: 0;
+            }
+        </style>
+        <script>
+            let inputs;
+            function keydown(key) {
+                let index = inputs.indexOf(this);
+                if (key.keyCode > 64 && key.keyCode < 91) {
+                    this.value = key.key.toUpperCase();
+                } else {
+                    this.value = this.value;
+                }
+                inputs[(index + 1) % inputs.length].focus();
+                inputs[(index + 1) % inputs.length].select();
+            }
+            window.onload = () => {
+                inputs = Array.from(document.querySelectorAll("input"));
+                inputs.forEach(e => e.addEventListener("keydown", keydown));
+            }
+        </script>
+    </head>
+    <body>
+        <input type="text" readonly>
+        <input type="text" readonly>
+        <input type="text" readonly>
+        <input type="text" readonly>
+        <input type="text" readonly>
+    </body>
+</html>
