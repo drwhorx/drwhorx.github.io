@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #faa6a4;
+    font-family: 'Arial';
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    padding: 4vh;
+}
+#title {
+    font-size: 4vh;
+    user-select: none;
+}
+#submit, #next, #prev {
+    line-height: 4vh;
+    font-size: 2vh;
+    font-weight: normal;
+    user-select: none;
+    border: .3vh solid black;
+    border-radius: 2vh;
+    width: 10vh;
+    text-align: center;
+}
+#board {
+    padding: 2.7vh;
+}
+#board .letters {
+    display: flex;
+    justify-content: center;
+    gap: 6vh;
+    margin: -2.7vh;
+}
+#board .letters.col {
+    flex-direction: column;
+}
+#board .center {
+    display: flex;
+    justify-content: center;
+}
+#lines {
+    width: 30vh;
+    height: 30vh;
+    z-index: -1;
+    border: .5vh solid black;
+    background-color: white;
+}
+#lines line {
+    stroke: #faa6a4;
+    stroke-width: .5;
+}
+.letter {
+    margin: 0;
+    padding: 0;
+    height: 5vh;
+    width: 5vh;
+    font-size: 3vh;
+    line-height: 5vh;
+    outline: none;
+    background-color: white;
+    border: .5vh solid black;
+    border-radius: 2.5vh;
+    box-sizing: border-box;
+    text-align: center;
+    font-weight: bold;
+}
+#actions {
+    display: flex;
+    gap: 2vh;
+}
+#solution {
+    font-size: 2vh;
+    color: black;
+}

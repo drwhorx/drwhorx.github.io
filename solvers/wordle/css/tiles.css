@@ -1,0 +1,48 @@
+#input, #output {
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 0.5vw;
+}
+
+.input td, .output td {
+    width: 12vw;
+    height: 12vw;
+    font-size: 6vw;
+    line-height: 12vw;
+    user-select: none;
+
+    border: 0.25vw solid #3a3a3c;
+    background-color: transparent;
+}
+
+.selected {
+    border-color: var(--red) !important;
+}
+
+td[state="0"] {
+    background-color: var(--absent);
+    border-color: transparent;
+}
+
+td[state="1"] {
+    background-color: var(--yellow);
+    border-color: transparent;
+}
+
+td[state="2"] {
+    background-color: var(--green);
+    border-color: transparent;
+}
+
+@media (min-width: 50vh) {
+    #input, #output {
+        border-spacing: 0.25vh;
+    }
+    .input td, .output td {
+        width: 6vh;
+        height: 6vh;
+        font-size: 3vh;
+        line-height: 6vh;
+        border: 0.125vh solid #3a3a3c;
+    }
+}
